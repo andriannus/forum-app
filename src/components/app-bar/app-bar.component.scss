@@ -1,0 +1,10 @@
+.AppBar {
+  @apply bg-white flex items-center justify-between p-bs w-full;
+  height: 56px;
+
+  > {
+    :not(:last-child) {
+      @apply mr-xs;
+    }
+  }
+}

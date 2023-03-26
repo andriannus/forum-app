@@ -1,0 +1,9 @@
+.AppBar-backButton {
+  @apply outline-none rounded-full transition duration-300;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active,
+  &:focus {
+    @apply bg-gray-300;
+  }
+}

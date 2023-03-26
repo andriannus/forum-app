@@ -1,0 +1,24 @@
+.BottomNavigationBar {
+  @apply bg-white h-full inline-flex w-full;
+  box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.05);
+
+  &-menu {
+    @apply cursor-pointer flex flex-col h-full items-center justify-center;
+    @apply outline-none select-none text-gray-700 text-xs transition;
+    @apply duration-300 w-full;
+    -webkit-tap-highlight-color: transparent;
+
+    &Text {
+      @apply leading-4 mt-2xs;
+    }
+
+    &:active,
+    &:focus {
+      @apply bg-ruby-100;
+    }
+  }
+}
+
+.is-active {
+  @apply text-ruby-500;
+}

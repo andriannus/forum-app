@@ -1,10 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import { config, library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faArrowLeft,
+  faHouse,
+  faRankingStar,
+} from "@fortawesome/free-solid-svg-icons";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+import { App } from "@/app";
+
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import "./main.scss";
+
+config.autoAddCss = false;
+library.add(faArrowLeft, faHouse, faRankingStar);
+
+const root = document.getElementById("root") as HTMLElement;
+
+createRoot(root).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-)
+  </StrictMode>
+);

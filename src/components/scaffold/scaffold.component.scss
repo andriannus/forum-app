@@ -1,0 +1,31 @@
+.Scaffold {
+  @apply flex flex-col h-screen min-h-screen w-full;
+
+  &-appBar {
+    @apply sticky top-0 z-20;
+    min-height: 56px;
+  }
+
+  &-body {
+    @apply bg-white flex-grow h-full w-full;
+  }
+
+  &-bottomNavigationBar {
+    @apply bottom-0 fixed w-full;
+    height: 56px;
+    max-width: theme("screens.mobile");
+  }
+
+  &--hasBottomNavigationBar {
+    height: auto;
+    padding-bottom: 56px;
+
+    .Scaffold-body {
+      @apply flex flex-col;
+
+      > * {
+        @apply flex-grow;
+      }
+    }
+  }
+}
