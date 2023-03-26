@@ -20,5 +20,5 @@ const root = document.getElementById("root") as HTMLElement;
 createRoot(root).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );

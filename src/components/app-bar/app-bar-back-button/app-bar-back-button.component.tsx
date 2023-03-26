@@ -14,7 +14,7 @@ const AppBarBackButton: FC<Partial<{ to: string }>> = ({ to = "" }) => {
 
   return (
     <>
-      {!!to ? (
+      {to ? (
         <Link
           id="BtnAppBarBack"
           aria-label="Back"
