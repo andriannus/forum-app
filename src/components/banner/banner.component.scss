@@ -1,0 +1,15 @@
+.Banner {
+  @apply cursor-default p-bs select-none;
+
+  &-title {
+    @apply font-extrabold mb-bs text-gray-900 text-xl leading-5;
+  }
+
+  &-subtitle {
+    @apply text-gray-700 text-sm leading-5;
+  }
+
+  &--center {
+    @apply text-center;
+  }
+}
