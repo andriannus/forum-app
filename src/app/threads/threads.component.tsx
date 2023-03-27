@@ -1,21 +1,32 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { List as ListLoader } from "react-content-loader";
 import { Link } from "react-router-dom";
 
-import { useGetThreadsQuery } from "@/stores/threads";
+import { useGetThreadsQuery, useGetUsersQuery } from "@/stores";
 import { transformToDistanceFormat } from "@/utils";
 
 import "./threads.component.scss";
 
 const Threads: FC = () => {
-  const { data: threads, isLoading } = useGetThreadsQuery();
+  const { data: threads, isLoading: isThreadsLoading } = useGetThreadsQuery();
+  const { data: users, isLoading: isUsersLoading } = useGetUsersQuery();
+
+  const getOwnerName = useCallback(
+    (ownerID: string) => {
+      if (!users) return "-";
+
+      const owner = users.find((user) => user.id === ownerID);
+      return owner?.name;
+    },
+    [users],
+  );
 
   return (
     <div className="Threads">
       <h2 className="Threads-headline">Mau Diskusi Apa?</h2>
 
-      {isLoading ? (
+      {isThreadsLoading ? (
         <ListLoader />
       ) : (
         <div className="ThreadsList" role="list">
@@ -27,7 +38,12 @@ const Threads: FC = () => {
                 to={`/threads/${thread.id}`}
               >
                 <h6 className="ThreadsList-title">{thread.title}</h6>
-                <p className="ThreadsList-subtitle">{thread.ownerId}</p>
+
+                {!isUsersLoading && (
+                  <p className="ThreadsList-subtitle">
+                    {getOwnerName(thread.ownerId)}
+                  </p>
+                )}
 
                 <div className="ThreadsList-info">
                   <div className="ThreadsList-infoItem">
