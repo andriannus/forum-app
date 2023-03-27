@@ -9,8 +9,13 @@ export const threadsAPI = createApi({
   reducerPath: "threadsAPI",
   baseQuery: fetchBaseQuery({ baseUrl: API.BASE_URL }),
   endpoints: (build) => ({
-    getThreads: build.query<ResponseWithData<Thread[]>, void>({
+    getThreads: build.query<Thread[], void>({
       query: () => "threads",
+      transformResponse: (
+        response: ResponseWithData<{ threads: Thread[] }>,
+      ) => {
+        return response.data.threads;
+      },
     }),
   }),
 });
