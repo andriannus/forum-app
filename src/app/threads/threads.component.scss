@@ -1,0 +1,56 @@
+.Threads {
+  @apply border-t border-gray-300 p-bs;
+
+  &-headline {
+    @apply font-bold mb-sm text-base leading-5;
+  }
+
+  &List {
+    &-info {
+      @apply mt-xs text-xs text-gray-700 flex justify-between;
+
+      &Item {
+        @apply flex items-center;
+
+        span {
+          @apply ml-2xs;
+        }
+      }
+    }
+
+    &-item {
+      @apply flex flex-col py-bs transition duration-300;
+      -webkit-tap-highlight-color: transparent;
+
+      &:hover {
+        @apply cursor-pointer;
+      }
+
+      &:first-child {
+        @apply pt-0;
+      }
+
+      &:last-child {
+        @apply pb-0;
+      }
+
+      &:not(:last-child) {
+        @apply border-gray-300 border-b;
+      }
+    }
+
+    &-title,
+    &-subtitle {
+      @apply truncate;
+    }
+
+    &-subtitle {
+      @apply leading-4 text-gray-700 text-xs;
+    }
+
+    &-title {
+      @apply font-bold leading-5;
+      font-size: 14px;
+    }
+  }
+}
