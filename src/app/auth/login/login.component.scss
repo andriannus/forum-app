@@ -1,0 +1,7 @@
+.Login {
+  @apply h-full flex flex-col pb-bs px-bs select-none;
+
+  &-body {
+    @apply flex-grow;
+  }
+}
