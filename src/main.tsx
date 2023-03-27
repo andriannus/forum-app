@@ -1,6 +1,7 @@
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowLeft,
+  faCommentDots,
   faHouse,
   faRankingStar,
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +14,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./main.scss";
 
 config.autoAddCss = false;
-library.add(faArrowLeft, faHouse, faRankingStar);
+library.add(faArrowLeft, faCommentDots, faHouse, faRankingStar);
 
 const root = document.getElementById("root") as HTMLElement;
 

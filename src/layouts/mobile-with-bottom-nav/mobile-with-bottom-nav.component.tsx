@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -11,6 +12,12 @@ const MobileWithBottomNav: FC = () => {
       <Scaffold
         appBar={
           <AppBar>
+            <FontAwesomeIcon
+              icon="comment-dots"
+              size="xl"
+              className="text-red-500"
+            />
+
             <AppBar.Brand>We The Thread</AppBar.Brand>
           </AppBar>
         }
