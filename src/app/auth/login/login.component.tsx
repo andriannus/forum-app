@@ -7,8 +7,14 @@ import { useLogin } from "./login.hook";
 import "./login.component.scss";
 
 const Login: FC = () => {
-  const { formState, handleLoginFormSubmit, handleSubmit, register, values } =
-    useLogin();
+  const {
+    formState,
+    handleLoginFormSubmit,
+    handleSubmit,
+    isLoading,
+    register,
+    values,
+  } = useLogin();
 
   return (
     <Scaffold
@@ -50,11 +56,11 @@ const Login: FC = () => {
         <Button
           id="BtnSubmit"
           color="primary"
-          disabled={!formState.isValid}
+          disabled={isLoading || !formState.isValid}
           fullWidth
           type="submit"
         >
-          Masuk
+          {isLoading ? "Sedang memuat..." : "Masuk"}
         </Button>
       </form>
     </Scaffold>

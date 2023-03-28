@@ -1,16 +1,21 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { AppRoutes } from "@/app";
-import { store } from "@/stores";
+import { persistor, store } from "@/stores";
 
 const App: FC = () => {
   return (
     <Provider store={store}>
-      <Router>
-        <AppRoutes />
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Suspense>
+            <AppRoutes />
+          </Suspense>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };
