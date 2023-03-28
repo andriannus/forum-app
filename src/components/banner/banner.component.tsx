@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { BannerProps } from "./banner.model";
 
@@ -29,4 +29,4 @@ Banner.propTypes = {
   title: PropTypes.string,
 };
 
-export default Banner;
+export default memo(Banner);
