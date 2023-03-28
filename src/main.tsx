@@ -13,6 +13,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "@/app";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import "notyf/notyf.min.css";
 import "./main.scss";
 
 config.autoAddCss = false;

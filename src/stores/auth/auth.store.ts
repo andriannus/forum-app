@@ -2,7 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
-import { LoginRequest, LoginResponse } from "@/models";
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterResponse,
+  RegisterRequest,
+  RegisterUser,
+} from "@/models";
 
 import { AuthState } from "./auth.model";
 
@@ -35,7 +41,17 @@ export const authAPI = createApi({
         return response.data.token;
       },
     }),
+    register: build.mutation<RegisterUser, RegisterRequest>({
+      query: (payload) => ({
+        url: "register",
+        method: "POST",
+        body: payload,
+      }),
+      transformResponse: (response: RegisterResponse) => {
+        return response.data.user;
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation } = authAPI;
+export const { useLoginMutation, useRegisterMutation } = authAPI;

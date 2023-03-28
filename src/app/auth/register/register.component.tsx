@@ -11,7 +11,8 @@ const Register: FC = () => {
     formState,
     handleRegisterFormSubmit,
     handleSubmit,
-    register,
+    isLoading,
+    registerField,
     values,
   } = useRegister();
 
@@ -37,7 +38,7 @@ const Register: FC = () => {
             className="mx-bs my-md"
             placeholder="Nama"
             value={values.name}
-            {...register("name", { required: true })}
+            {...registerField("name", { required: true })}
           />
 
           <TextField
@@ -48,7 +49,7 @@ const Register: FC = () => {
             placeholder="Email"
             type="email"
             value={values.email}
-            {...register("email", {
+            {...registerField("email", {
               pattern: /\S+@\S+\.\S+/,
               required: true,
             })}
@@ -61,18 +62,18 @@ const Register: FC = () => {
             placeholder="Password"
             type="password"
             value={values.password}
-            {...register("password", { minLength: 8, required: true })}
+            {...registerField("password", { minLength: 8, required: true })}
           />
         </div>
 
         <Button
           id="BtnSubmit"
           color="primary"
-          disabled={!formState.isValid}
+          disabled={isLoading || !formState.isValid}
           fullWidth
           type="submit"
         >
-          Daftar
+          {isLoading ? "Sedang memuat..." : "Daftar"}
         </Button>
       </form>
     </Scaffold>

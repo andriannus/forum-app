@@ -1,26 +1,30 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
-import { Guest } from "@/app/auth/components";
+import { Mobile } from "@/layouts";
+
+import { Guest } from "./components";
 
 const Login = lazy(() => import("./login/login.component"));
 const Register = lazy(() => import("./register/register.component"));
 
 export const authRoutes: RouteObject[] = [
   {
-    path: "login",
+    path: "",
     element: (
       <Guest>
-        <Login />
+        <Mobile />
       </Guest>
     ),
-  },
-  {
-    path: "register",
-    element: (
-      <Guest>
-        <Register />
-      </Guest>
-    ),
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
   },
 ];

@@ -1,16 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { authAPI, authSlice } from "./auth";
 import { threadsAPI } from "./threads";
