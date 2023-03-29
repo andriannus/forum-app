@@ -9,8 +9,15 @@ import { transformToDistanceFormat } from "@/utils";
 import "./threads.component.scss";
 
 const Threads: FC = () => {
-  const { data: threads, isLoading: isThreadsLoading } = useGetThreadsQuery();
-  const { data: users, isLoading: isUsersLoading } = useGetUsersQuery();
+  const { data: threads, isLoading: isThreadsLoading } = useGetThreadsQuery(
+    undefined,
+    { refetchOnMountOrArgChange: true },
+  );
+
+  const { data: users, isLoading: isUsersLoading } = useGetUsersQuery(
+    undefined,
+    { refetchOnMountOrArgChange: true },
+  );
 
   const getOwnerName = useCallback(
     (ownerID: string) => {
