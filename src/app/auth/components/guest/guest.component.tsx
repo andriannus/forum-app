@@ -7,7 +7,7 @@ import { useAppSelector } from "@/stores";
 const Guest: FC<PropsWithChildren> = ({ children }) => {
   const token = useAppSelector((state) => state.auth.token);
 
-  if (token) return <Navigate replace to="/" />;
+  if (token) return <Navigate replace to="/threads" />;
 
   return <>{children}</>;
 };

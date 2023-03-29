@@ -27,7 +27,7 @@ export function useLogin() {
       try {
         const token = await login(data).unwrap();
         dispatch(setCredentials(token));
-        navigate("/");
+        navigate("/threads");
       } catch (error) {
         console.error(error);
       }

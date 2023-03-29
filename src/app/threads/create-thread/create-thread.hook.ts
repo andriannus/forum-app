@@ -27,7 +27,7 @@ export function useCreateThread() {
       async (data) => {
         try {
           await createThread(data).unwrap();
-          navigate("/");
+          navigate("/threads");
         } catch (error) {
           notyf.error("Ada sesuatu yang salah");
         }

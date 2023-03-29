@@ -20,7 +20,7 @@ const CreateThread: FC = () => {
     <Scaffold
       appBar={
         <AppBar>
-          <AppBar.BackButton to="/" />
+          <AppBar.BackButton to="/threads" />
           <AppBar.Title>Membuat Diskusi</AppBar.Title>
         </AppBar>
       }

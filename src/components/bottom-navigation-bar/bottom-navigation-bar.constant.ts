@@ -6,7 +6,7 @@ export const MENUS: BottomNavigationBarMenu[] = [
     id: "LnkHome",
     name: "home",
     title: "Beranda",
-    to: "/",
+    to: "/threads",
   },
   {
     icon: "comment-medical",

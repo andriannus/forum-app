@@ -11,7 +11,7 @@ const CreateThread = lazy(
 
 export const threadsRoutes: RouteObject[] = [
   {
-    path: "",
+    path: "threads",
     element: (
       <Authenticated>
         <MobileWithBottomNav />
