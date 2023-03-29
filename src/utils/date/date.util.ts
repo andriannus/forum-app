@@ -1,8 +1,8 @@
 import { formatDistance } from "date-fns";
 import id from "date-fns/locale/id";
 
-export function transformToDistanceFormat(date: string, baseDate = ""): string {
-  const validDate = new Date(date);
+export function transformToDistanceFormat(date = "", baseDate = ""): string {
+  const validDate = date ? new Date(date) : new Date();
   const validBaseDate = !baseDate ? new Date() : new Date(baseDate);
 
   return formatDistance(validDate, validBaseDate, {

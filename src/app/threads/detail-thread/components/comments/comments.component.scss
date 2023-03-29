@@ -1,0 +1,29 @@
+.Comment {
+  &-action {
+    > * {
+      @apply mr-xs;
+    }
+  }
+
+  &-actions {
+    @apply flex mt-2xs text-xs;
+
+    > * {
+      @apply mr-xs;
+    }
+  }
+
+  &-content {
+    @apply mt-2xs text-sm;
+  }
+
+  &-list {
+    @apply py-bs;
+
+    &Item {
+      &:not(:last-child) {
+        @apply mb-bs;
+      }
+    }
+  }
+}

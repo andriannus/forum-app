@@ -8,6 +8,9 @@ const Threads = lazy(() => import("./threads.component"));
 const CreateThread = lazy(
   () => import("./create-thread/create-thread.component"),
 );
+const DetailThread = lazy(
+  () => import("./detail-thread/detail-thread.component"),
+);
 
 export const threadsRoutes: RouteObject[] = [
   {
@@ -35,6 +38,10 @@ export const threadsRoutes: RouteObject[] = [
       {
         path: "create",
         element: <CreateThread />,
+      },
+      {
+        path: ":id",
+        element: <DetailThread />,
       },
     ],
   },

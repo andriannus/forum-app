@@ -7,6 +7,8 @@ import {
   faComments,
   faHouse,
   faRankingStar,
+  faThumbsDown,
+  faThumbsUp,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { StrictMode } from "react";
@@ -27,6 +29,8 @@ library.add(
   faComments,
   faHouse,
   faRankingStar,
+  faThumbsDown,
+  faThumbsUp,
   faUser,
 );
 

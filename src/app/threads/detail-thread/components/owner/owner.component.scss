@@ -1,0 +1,11 @@
+.Owner {
+  @apply flex items-center;
+
+  &-avatar {
+    @apply bg-gray-300 h-lg w-lg overflow-hidden rounded;
+  }
+
+  &-info {
+    @apply flex flex-col flex-grow ml-sm text-xs;
+  }
+}

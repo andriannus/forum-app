@@ -54,7 +54,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>(
     }
 
     return (
-      <div className={className}>
+      <div {...(className && { className })}>
         <textarea
           ref={ref}
           id={id}

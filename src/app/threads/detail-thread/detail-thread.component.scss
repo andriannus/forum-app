@@ -1,0 +1,33 @@
+.DetailThread {
+  @apply flex flex-col h-full p-bs;
+
+  &-action {
+    @apply py-xs text-center w-full;
+
+    > * {
+      @apply mr-xs;
+    }
+  }
+
+  &-actions {
+    @apply border-y flex items-center justify-between text-xs;
+  }
+
+  &-body {
+    @apply pb-bs;
+  }
+
+  &-commentSection {
+    > * {
+      @apply mb-xs;
+    }
+  }
+
+  &-content {
+    @apply text-sm;
+  }
+
+  &-title {
+    @apply mb-xs mt-sm text-lg;
+  }
+}

@@ -1,14 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
-import { ResponseWithData } from "@/models";
 
+import { RootState } from "../store";
 import {
   Thread,
   ThreadCreateRequest,
   ThreadCreateResponse,
+  ThreadDetail,
+  ThreadDetailResponse,
+  ThreadsResponse,
 } from "./threads.model";
-import { RootState } from "../store";
 
 export const threadsAPI = createApi({
   reducerPath: "threadsAPI",
@@ -25,11 +27,15 @@ export const threadsAPI = createApi({
     },
   }),
   endpoints: (build) => ({
+    getThread: build.query<ThreadDetail, string>({
+      query: (id) => `threads/${id}`,
+      transformResponse: (response: ThreadDetailResponse) => {
+        return response.data.detailThread;
+      },
+    }),
     getThreads: build.query<Thread[], void>({
       query: () => "threads",
-      transformResponse: (
-        response: ResponseWithData<{ threads: Thread[] }>,
-      ) => {
+      transformResponse: (response: ThreadsResponse) => {
         return response.data.threads;
       },
     }),
@@ -43,4 +49,8 @@ export const threadsAPI = createApi({
   }),
 });
 
-export const { useCreateThreadMutation, useGetThreadsQuery } = threadsAPI;
+export const {
+  useCreateThreadMutation,
+  useGetThreadQuery,
+  useGetThreadsQuery,
+} = threadsAPI;
