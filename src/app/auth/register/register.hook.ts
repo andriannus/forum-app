@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { HTTP_STATUS_CODES } from "@/constants";
 import { useNotyf } from "@/context";
+import { RegisterRequest } from "@/models";
 import { useRegisterMutation } from "@/stores";
-
-import { RegisterForm } from "./register.model";
 
 export function useRegister() {
   const navigate = useNavigate();
@@ -18,18 +17,18 @@ export function useRegister() {
     handleSubmit,
     register: registerField,
     watch,
-  } = useForm<RegisterForm>({
+  } = useForm<RegisterRequest>({
     mode: "onChange",
   });
 
-  const [values, setValues] = useState({} as Partial<RegisterForm>);
+  const [values, setValues] = useState({} as Partial<RegisterRequest>);
 
   useEffect(() => {
     const subscription = watch(setValues);
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const handleRegisterFormSubmit: SubmitHandler<RegisterForm> = useCallback(
+  const handleRegisterFormSubmit: SubmitHandler<RegisterRequest> = useCallback(
     async (data) => {
       try {
         await register(data).unwrap();

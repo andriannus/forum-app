@@ -3,27 +3,26 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import { LoginRequest } from "@/models";
 import { useLoginMutation, setCredentials } from "@/stores";
-
-import { LoginForm } from "./login.model";
 
 export function useLogin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
 
-  const { formState, handleSubmit, register, watch } = useForm<LoginForm>({
+  const { formState, handleSubmit, register, watch } = useForm<LoginRequest>({
     mode: "onChange",
   });
 
-  const [values, setValues] = useState({} as Partial<LoginForm>);
+  const [values, setValues] = useState({} as Partial<LoginRequest>);
 
   useEffect(() => {
     const subscription = watch(setValues);
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  const handleLoginFormSubmit: SubmitHandler<LoginForm> = useCallback(
+  const handleLoginFormSubmit: SubmitHandler<LoginRequest> = useCallback(
     async (data) => {
       try {
         const token = await login(data).unwrap();

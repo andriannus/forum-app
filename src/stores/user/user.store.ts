@@ -1,9 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
-import { ResponseWithData } from "@/models";
 
-import { User } from "./user.model";
+import { User, UserResponse } from "./user.model";
 
 export const userAPI = createApi({
   reducerPath: "userAPI",
@@ -11,7 +10,7 @@ export const userAPI = createApi({
   endpoints: (build) => ({
     getUsers: build.query<User[], void>({
       query: () => "users",
-      transformResponse: (response: ResponseWithData<{ users: User[] }>) => {
+      transformResponse: (response: UserResponse) => {
         return response.data.users;
       },
     }),
