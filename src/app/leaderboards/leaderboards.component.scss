@@ -1,0 +1,37 @@
+.Leaderboards {
+  @apply border-t border-gray-300 p-bs text-sm;
+
+  &-avatar {
+    @apply h-md mx-sm rounded-full w-md;
+  }
+
+  &-heading {
+    @apply flex justify-between mb-2xs text-xs text-gray-700;
+  }
+
+  &-headline {
+    @apply font-bold mb-sm text-base leading-5;
+  }
+
+  &-list {
+    &Item {
+      @apply flex items-center py-xs;
+
+      &:not(:last-child) {
+        @apply border-gray-300 border-b;
+      }
+    }
+  }
+
+  &-number {
+    @apply inline-flex w-sm;
+  }
+
+  &-user {
+    @apply flex items-center flex-grow mr-xs overflow-x-hidden;
+
+    &name {
+      @apply w-10/12 truncate;
+    }
+  }
+}

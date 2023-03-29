@@ -13,12 +13,14 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { authAPI, authSlice } from "./auth";
+import { leaderboardsAPI } from "./leaderboards";
 import { threadsAPI } from "./threads";
 import { userAPI } from "./user";
 
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
+  [leaderboardsAPI.reducerPath]: leaderboardsAPI.reducer,
   [threadsAPI.reducerPath]: threadsAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
 });
@@ -37,7 +39,12 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authAPI.middleware, threadsAPI.middleware, userAPI.middleware]);
+    }).concat([
+      authAPI.middleware,
+      leaderboardsAPI.middleware,
+      threadsAPI.middleware,
+      userAPI.middleware,
+    ]);
   },
 });
 
