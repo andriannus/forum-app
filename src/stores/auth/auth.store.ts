@@ -7,7 +7,7 @@ import {
   LoginResponse,
   RegisterResponse,
   RegisterRequest,
-  RegisterUser,
+  User,
 } from "@/models";
 
 import { AuthState } from "./auth.model";
@@ -41,7 +41,7 @@ export const authAPI = createApi({
         return response.data.token;
       },
     }),
-    register: build.mutation<RegisterUser, RegisterRequest>({
+    register: build.mutation<User, RegisterRequest>({
       query: (payload) => ({
         url: "register",
         method: "POST",

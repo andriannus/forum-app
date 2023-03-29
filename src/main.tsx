@@ -7,6 +7,7 @@ import {
   faComments,
   faHouse,
   faRankingStar,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -26,6 +27,7 @@ library.add(
   faComments,
   faHouse,
   faRankingStar,
+  faUser,
 );
 
 const root = document.getElementById("root") as HTMLElement;

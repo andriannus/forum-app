@@ -6,4 +6,15 @@
   @apply bg-gray-100;
 }
 
+.Link {
+  @apply cursor-pointer leading-4 outline-none select-none;
+  @apply text-ruby-500 text-xs;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active,
+  &:focus {
+    @apply text-ruby-200;
+  }
+}
+
 @import "./fonts.scss";

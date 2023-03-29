@@ -1,0 +1,27 @@
+.Profile {
+  @apply flex items-center justify-center;
+
+  &-avatar {
+    @apply bg-gray-300 overflow-hidden rounded-full;
+    height: 64px;
+    max-height: 64px;
+    max-width: 64px;
+    width: 64px;
+  }
+
+  &-body {
+    @apply flex flex-col items-center;
+  }
+
+  &-detail {
+    @apply flex flex-col flex-grow items-center mb-bs justify-center;
+  }
+
+  &-subtitle {
+    @apply text-gray-700 text-sm leading-5;
+  }
+
+  &-title {
+    @apply font-semibold mb-xs mt-md text-base leading-5 text-gray-900;
+  }
+}

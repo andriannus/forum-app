@@ -13,7 +13,7 @@ export interface RegisterRequest {
   password: string;
 }
 
-export interface RegisterUser {
+export interface User {
   avatar: string;
   email: string;
   id: string;
@@ -21,5 +21,5 @@ export interface RegisterUser {
 }
 
 export type RegisterResponse = ResponseWithData<{
-  user: RegisterUser;
+  user: User;
 }>;

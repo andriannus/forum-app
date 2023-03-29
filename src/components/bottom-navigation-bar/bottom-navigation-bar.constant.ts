@@ -22,4 +22,11 @@ export const MENUS: BottomNavigationBarMenu[] = [
     title: "Klasemen",
     to: "/leaderboards",
   },
+  {
+    icon: "user",
+    id: "LnkProfile",
+    name: "profile",
+    title: "Profil",
+    to: "/me",
+  },
 ];
