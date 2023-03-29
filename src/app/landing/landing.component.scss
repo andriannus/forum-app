@@ -1,0 +1,24 @@
+.Landing {
+  @apply cursor-default fixed flex flex-col h-full justify-end;
+  @apply max-w-screen-mobile p-bs select-none w-full;
+
+  &-actions {
+    @apply my-xl;
+  }
+
+  &-banner {
+    @apply mx-bs;
+  }
+
+  &-caption {
+    @apply mb-xs text-gray-700 text-center text-xs;
+  }
+
+  &-subtitle {
+    @apply text-gray-700 text-sm;
+  }
+
+  &-title {
+    @apply font-extrabold mb-xs text-ruby-500 text-4xl leading-9;
+  }
+}
