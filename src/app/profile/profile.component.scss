@@ -1,5 +1,5 @@
 .Profile {
-  @apply flex items-center justify-center;
+  @apply flex items-center justify-center p-bs;
 
   &-avatar {
     @apply bg-gray-300 overflow-hidden rounded-full;
