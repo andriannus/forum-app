@@ -5,14 +5,21 @@ export const MENUS: BottomNavigationBarMenu[] = [
     icon: "house",
     id: "LnkHome",
     name: "home",
-    title: "Home",
+    title: "Beranda",
     to: "/",
+  },
+  {
+    icon: "comment-medical",
+    id: "LnkDiscuss",
+    name: "home",
+    title: "Berdiskusi",
+    to: "/threads/create",
   },
   {
     icon: "ranking-star",
     id: "LnkLeaderboards",
     name: "leaderboards",
-    title: "Leaderboards",
+    title: "Klasemen",
     to: "/leaderboards",
   },
 ];

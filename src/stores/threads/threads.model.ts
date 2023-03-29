@@ -1,3 +1,5 @@
+import { ResponseWithData } from "@/models";
+
 export interface Thread {
   id: string;
   title: string;
@@ -13,3 +15,11 @@ export interface Thread {
 export interface ThreadsState {
   threads: Thread[];
 }
+
+export interface ThreadCreateRequest {
+  title: string;
+  category: string;
+  body: string;
+}
+
+export type ThreadCreateResponse = ResponseWithData<{ thread: Thread }>;
