@@ -56,3 +56,13 @@ export interface ThreadCommentRequest {
 export type ThreadCommentResponse = ResponseWithData<{
   comment: ThreadComment;
 }>;
+
+export interface Vote {
+  id: string;
+  userId: string;
+  voteType: 1 | -1;
+}
+
+export type ThreadVoteResponse = ResponseWithData<{
+  vote: { threadId: string } & Vote;
+}>;

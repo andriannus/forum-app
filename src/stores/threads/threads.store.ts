@@ -12,6 +12,7 @@ import {
   ThreadDetail,
   ThreadDetailResponse,
   ThreadsResponse,
+  ThreadVoteResponse,
 } from "./threads.model";
 
 export const threadsAPI = createApi({
@@ -55,12 +56,26 @@ export const threadsAPI = createApi({
         body: { content },
       }),
     }),
+    upVoteThread: build.mutation<ThreadVoteResponse, string>({
+      query: (id) => ({
+        url: `threads/${id}/up-vote`,
+        method: "POST",
+      }),
+    }),
+    downVoteThread: build.mutation<ThreadVoteResponse, string>({
+      query: (id) => ({
+        url: `threads/${id}/down-vote`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
 export const {
   useCreateCommentMutation,
   useCreateThreadMutation,
+  useDownVoteThreadMutation,
   useGetThreadQuery,
   useGetThreadsQuery,
+  useUpVoteThreadMutation,
 } = threadsAPI;

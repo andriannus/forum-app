@@ -6,7 +6,9 @@ import { useNotyf } from "@/context";
 import {
   ThreadCommentRequest,
   useCreateCommentMutation,
+  useDownVoteThreadMutation,
   useGetThreadQuery,
+  useUpVoteThreadMutation,
 } from "@/stores";
 
 export function useDetailThread() {
@@ -55,10 +57,34 @@ export function useDetailThread() {
       [createComment, notyf, refetch, resetField],
     );
 
+  const [downVote] = useDownVoteThreadMutation();
+
+  const handleDownVoteClick = useCallback(async () => {
+    try {
+      await downVote(id).unwrap();
+      refetch();
+    } catch {
+      notyf.error("Ada sesuatu yang salah");
+    }
+  }, [downVote, id, notyf, refetch]);
+
+  const [upVote] = useUpVoteThreadMutation();
+
+  const handleUpVoteClick = useCallback(async () => {
+    try {
+      await upVote(id).unwrap();
+      refetch();
+    } catch {
+      notyf.error("Ada sesuatu yang salah");
+    }
+  }, [upVote, id, notyf, refetch]);
+
   return {
     formState,
     handleCommentFormSubmit,
+    handleDownVoteClick,
     handleSubmit,
+    handleUpVoteClick,
     isCommentLoading,
     isThreadLoading,
     register,

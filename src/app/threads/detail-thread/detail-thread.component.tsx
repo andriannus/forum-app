@@ -13,7 +13,9 @@ const DetailThread: FC = () => {
   const {
     formState,
     handleCommentFormSubmit,
+    handleDownVoteClick,
     handleSubmit,
+    handleUpVoteClick,
     isCommentLoading,
     isThreadLoading,
     register,
@@ -50,15 +52,25 @@ const DetailThread: FC = () => {
             </div>
 
             <div className="DetailThread-actions">
-              <div className="DetailThread-action">
+              <button
+                id="BtnUpVote"
+                className="DetailThread-action"
+                type="button"
+                onClick={handleUpVoteClick}
+              >
                 <FontAwesomeIcon icon="thumbs-up" />
                 <span>{thread?.upVotesBy.length}</span>
-              </div>
+              </button>
 
-              <div className="DetailThread-action">
+              <button
+                id="BtnDownVote"
+                className="DetailThread-action"
+                type="button"
+                onClick={handleDownVoteClick}
+              >
                 <FontAwesomeIcon icon="thumbs-down" />
                 <span>{thread?.downVotesBy.length}</span>
-              </div>
+              </button>
 
               <div className="DetailThread-action">
                 <FontAwesomeIcon icon="comments" />
