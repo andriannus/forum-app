@@ -20,7 +20,7 @@ export interface Thread extends ThreadInGeneral, VotesBy {
 
 export type ThreadsResponse = ResponseWithData<{ threads: Thread[] }>;
 
-export interface ThreadDetailComment extends VotesBy {
+export interface ThreadComment extends VotesBy {
   id: string;
   content: string;
   createdAt: string;
@@ -28,7 +28,7 @@ export interface ThreadDetailComment extends VotesBy {
 }
 
 export interface ThreadDetail extends ThreadInGeneral, VotesBy {
-  comments: ThreadDetailComment[];
+  comments: ThreadComment[];
   owner: User;
 }
 
@@ -47,3 +47,12 @@ export interface ThreadCreateRequest {
 }
 
 export type ThreadCreateResponse = ResponseWithData<{ thread: Thread }>;
+
+export interface ThreadCommentRequest {
+  content: string;
+  id: string;
+}
+
+export type ThreadCommentResponse = ResponseWithData<{
+  comment: ThreadComment;
+}>;

@@ -1,5 +1,5 @@
-import { ThreadDetailComment } from "@/stores";
+import { ThreadComment } from "@/stores";
 
 export interface CommentsProps {
-  items: ThreadDetailComment[];
+  items: ThreadComment[];
 }

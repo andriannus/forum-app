@@ -5,6 +5,8 @@ import { API } from "@/constants";
 import { RootState } from "../store";
 import {
   Thread,
+  ThreadCommentRequest,
+  ThreadCommentResponse,
   ThreadCreateRequest,
   ThreadCreateResponse,
   ThreadDetail,
@@ -46,10 +48,18 @@ export const threadsAPI = createApi({
         body: payload,
       }),
     }),
+    createComment: build.mutation<ThreadCommentResponse, ThreadCommentRequest>({
+      query: ({ content, id }) => ({
+        url: `threads/${id}/comments`,
+        method: "POST",
+        body: { content },
+      }),
+    }),
   }),
 });
 
 export const {
+  useCreateCommentMutation,
   useCreateThreadMutation,
   useGetThreadQuery,
   useGetThreadsQuery,

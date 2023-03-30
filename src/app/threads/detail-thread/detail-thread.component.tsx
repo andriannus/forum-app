@@ -1,20 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
 import { Facebook as Loader } from "react-content-loader";
-import { useParams } from "react-router-dom";
 
 import { AppBar, Button, Scaffold, TextArea } from "@/components";
-import { useGetThreadQuery } from "@/stores";
 
 import { Comments, Owner } from "./components";
+import { useDetailThread } from "./detail-thread.hook";
 
 import "./detail-thread.component.scss";
 
 const DetailThread: FC = () => {
-  const { id = "" } = useParams();
-  const { data: thread, isLoading } = useGetThreadQuery(id, {
-    refetchOnMountOrArgChange: true,
-  });
+  const {
+    formState,
+    handleCommentFormSubmit,
+    handleSubmit,
+    isCommentLoading,
+    isThreadLoading,
+    register,
+    thread,
+    values,
+  } = useDetailThread();
 
   return (
     <Scaffold
@@ -25,7 +30,7 @@ const DetailThread: FC = () => {
       }
     >
       <div className="DetailThread">
-        {isLoading ? (
+        {isThreadLoading ? (
           <Loader />
         ) : (
           <>
@@ -63,13 +68,27 @@ const DetailThread: FC = () => {
 
             <Comments items={thread?.comments} />
 
-            <div className="DetailThread-commentSection">
-              <TextArea placeholder="Tambah komentar..." />
+            <form
+              className="DetailThread-commentSection"
+              onSubmit={handleSubmit(handleCommentFormSubmit)}
+            >
+              <TextArea
+                id="TxtComment"
+                placeholder="Tambah komentar..."
+                value={values.content}
+                {...register("content", { required: true })}
+              />
 
-              <Button color="primary" fullWidth small>
-                Kirim
+              <Button
+                color="primary"
+                disabled={!formState.isValid || isCommentLoading}
+                fullWidth
+                small
+                type="submit"
+              >
+                {isCommentLoading ? "Mengirim..." : "Kirim"}
               </Button>
-            </div>
+            </form>
           </>
         )}
       </div>
