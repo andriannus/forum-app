@@ -9,16 +9,7 @@ import {
 } from "@/stores";
 
 export function useFilterThreads() {
-  const dispatch = useDispatch();
-
-  const categories = useAppSelector((state) => state.threads.categories);
-  const threads = useAppSelector((state) => state.threads.threads);
-  const selectedCategory = useAppSelector(
-    (state) => state.threads.selectedCategory,
-  );
-  const filteredThreads = useAppSelector(
-    (state) => state.threads.filteredThreads,
-  );
+  const { selectedCategory } = useAppSelector((state) => state.threads);
 
   const getChipActiveStatus = useCallback(
     (category: string) => {
@@ -26,6 +17,9 @@ export function useFilterThreads() {
     },
     [selectedCategory],
   );
+
+  const dispatch = useDispatch();
+  const { threads } = useAppSelector((state) => state.threads);
 
   const handleChipClick = useCallback(
     (category: string) => {
@@ -46,6 +40,9 @@ export function useFilterThreads() {
     },
     [dispatch, selectedCategory, threads],
   );
+
+  const { categories } = useAppSelector((state) => state.threads);
+  const { filteredThreads } = useAppSelector((state) => state.threads);
 
   return {
     categories,

@@ -6,7 +6,7 @@ import { useAppSelector } from "@/stores";
 
 const Authenticated: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
-  const token = useAppSelector((state) => state.auth.token);
+  const { token } = useAppSelector((state) => state.auth);
 
   if (token) return <>{children}</>;
 

@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { useNotyf } from "@/context";
 
 import {
+  selectCategory,
   setCategories,
+  setFilteredThreads,
   setThreads,
   useAppSelector,
   useGetThreadsMutation,
@@ -25,8 +27,10 @@ export function useThreads() {
         categories.add(thread.category);
       });
 
+      dispatch(selectCategory(""));
       dispatch(setCategories(Array.from(categories)));
       dispatch(setThreads(threads));
+      dispatch(setFilteredThreads(threads));
     } catch {
       notyf.error("Ada sesuatu yang salah");
     }

@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { useAppSelector } from "@/stores";
 
 const Guest: FC<PropsWithChildren> = ({ children }) => {
-  const token = useAppSelector((state) => state.auth.token);
+  const { token } = useAppSelector((state) => state.auth);
 
   if (token) return <Navigate replace to="/threads" />;
 
