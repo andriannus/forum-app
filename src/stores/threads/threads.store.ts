@@ -7,6 +7,8 @@ import {
   Thread,
   ThreadCommentRequest,
   ThreadCommentResponse,
+  ThreadCommentVoteRequest,
+  ThreadCommentVoteResponse,
   ThreadCreateRequest,
   ThreadCreateResponse,
   ThreadDetail,
@@ -19,12 +21,10 @@ export const threadsAPI = createApi({
   reducerPath: "threadsAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: API.BASE_URL,
-    prepareHeaders: (headers, { getState, type }) => {
+    prepareHeaders: (headers, { getState }) => {
       const { token } = (getState() as RootState).auth;
 
-      if (type === "mutation") {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
+      headers.set("Authorization", `Bearer ${token}`);
 
       return headers;
     },
@@ -49,6 +49,24 @@ export const threadsAPI = createApi({
         body: payload,
       }),
     }),
+    upvoteThread: build.mutation<ThreadVoteResponse, string>({
+      query: (id) => ({
+        url: `threads/${id}/up-vote`,
+        method: "POST",
+      }),
+    }),
+    downvoteThread: build.mutation<ThreadVoteResponse, string>({
+      query: (id) => ({
+        url: `threads/${id}/down-vote`,
+        method: "POST",
+      }),
+    }),
+    neutralizeVoteThread: build.mutation<ThreadVoteResponse, string>({
+      query: (id) => ({
+        url: `threads/${id}/neutral-vote`,
+        method: "POST",
+      }),
+    }),
     createComment: build.mutation<ThreadCommentResponse, ThreadCommentRequest>({
       query: ({ content, id }) => ({
         url: `threads/${id}/comments`,
@@ -56,15 +74,30 @@ export const threadsAPI = createApi({
         body: { content },
       }),
     }),
-    upVoteThread: build.mutation<ThreadVoteResponse, string>({
-      query: (id) => ({
-        url: `threads/${id}/up-vote`,
+    upvoteComment: build.mutation<
+      ThreadCommentVoteResponse,
+      ThreadCommentVoteRequest
+    >({
+      query: ({ commentID, threadID }) => ({
+        url: `threads/${threadID}/comments/${commentID}/up-vote`,
         method: "POST",
       }),
     }),
-    downVoteThread: build.mutation<ThreadVoteResponse, string>({
-      query: (id) => ({
-        url: `threads/${id}/down-vote`,
+    downvoteComment: build.mutation<
+      ThreadCommentVoteResponse,
+      ThreadCommentVoteRequest
+    >({
+      query: ({ commentID, threadID }) => ({
+        url: `threads/${threadID}/comments/${commentID}/down-vote`,
+        method: "POST",
+      }),
+    }),
+    neutralizeVoteComment: build.mutation<
+      ThreadCommentVoteResponse,
+      ThreadCommentVoteRequest
+    >({
+      query: ({ commentID, threadID }) => ({
+        url: `threads/${threadID}/comments/${commentID}/neutral-vote`,
         method: "POST",
       }),
     }),
@@ -74,8 +107,12 @@ export const threadsAPI = createApi({
 export const {
   useCreateCommentMutation,
   useCreateThreadMutation,
-  useDownVoteThreadMutation,
+  useDownvoteThreadMutation,
+  useDownvoteCommentMutation,
   useGetThreadQuery,
   useGetThreadsQuery,
-  useUpVoteThreadMutation,
+  useNeutralizeVoteCommentMutation,
+  useNeutralizeVoteThreadMutation,
+  useUpvoteCommentMutation,
+  useUpvoteThreadMutation,
 } = threadsAPI;

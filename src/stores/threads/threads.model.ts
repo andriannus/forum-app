@@ -66,3 +66,12 @@ export interface Vote {
 export type ThreadVoteResponse = ResponseWithData<{
   vote: { threadId: string } & Vote;
 }>;
+
+export interface ThreadCommentVoteRequest {
+  threadID: string;
+  commentID: string;
+}
+
+export type ThreadCommentVoteResponse = ResponseWithData<{
+  vote: { commentId: string } & Vote;
+}>;

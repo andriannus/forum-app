@@ -17,4 +17,8 @@
   }
 }
 
+.is-active {
+  @apply text-ruby-500;
+}
+
 @import "./fonts.scss";

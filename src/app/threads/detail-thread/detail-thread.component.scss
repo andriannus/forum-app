@@ -3,6 +3,7 @@
 
   &-action {
     @apply py-xs text-center w-full;
+    -webkit-tap-highlight-color: transparent;
 
     > * {
       @apply mr-xs;

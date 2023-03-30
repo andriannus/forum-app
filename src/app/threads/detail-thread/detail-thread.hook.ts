@@ -1,25 +1,42 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 import { useNotyf } from "@/context";
 import {
   ThreadCommentRequest,
+  useAppSelector,
   useCreateCommentMutation,
-  useDownVoteThreadMutation,
+  useDownvoteCommentMutation,
+  useDownvoteThreadMutation,
   useGetThreadQuery,
-  useUpVoteThreadMutation,
+  useNeutralizeVoteCommentMutation,
+  useNeutralizeVoteThreadMutation,
+  useUpvoteCommentMutation,
+  useUpvoteThreadMutation,
 } from "@/stores";
 
 export function useDetailThread() {
-  const { id = "" } = useParams();
+  const { id: threadID = "" } = useParams();
   const {
     data: thread,
     isLoading: isThreadLoading,
     refetch,
-  } = useGetThreadQuery(id, {
+  } = useGetThreadQuery(threadID, {
     refetchOnMountOrArgChange: true,
   });
+
+  const profile = useAppSelector((state) => state.auth.user);
+
+  const hasUpvotedThread = useMemo(() => {
+    if (!thread || !profile) return false;
+    return thread.upVotesBy.includes(profile.id);
+  }, [profile, thread]);
+
+  const hasDownvotedThread = useMemo(() => {
+    if (!thread || !profile) return false;
+    return thread.downVotesBy.includes(profile.id);
+  }, [profile, thread]);
 
   const [createComment, { isLoading: isCommentLoading }] =
     useCreateCommentMutation();
@@ -31,7 +48,7 @@ export function useDetailThread() {
       mode: "onChange",
       defaultValues: {
         content: "",
-        id,
+        id: threadID,
       },
     });
 
@@ -57,34 +74,106 @@ export function useDetailThread() {
       [createComment, notyf, refetch, resetField],
     );
 
-  const [downVote] = useDownVoteThreadMutation();
+  const [neutralizeVoteThread] = useNeutralizeVoteThreadMutation();
+  const [downvoteThread] = useDownvoteThreadMutation();
 
-  const handleDownVoteClick = useCallback(async () => {
+  const handleDownvoteThreadClick = useCallback(async () => {
     try {
-      await downVote(id).unwrap();
+      if (hasDownvotedThread) {
+        await neutralizeVoteThread(threadID).unwrap();
+      } else {
+        await downvoteThread(threadID).unwrap();
+      }
+
       refetch();
     } catch {
       notyf.error("Ada sesuatu yang salah");
     }
-  }, [downVote, id, notyf, refetch]);
+  }, [
+    downvoteThread,
+    hasDownvotedThread,
+    neutralizeVoteThread,
+    notyf,
+    refetch,
+    threadID,
+  ]);
 
-  const [upVote] = useUpVoteThreadMutation();
+  const [upvoteThread] = useUpvoteThreadMutation();
 
-  const handleUpVoteClick = useCallback(async () => {
+  const handleUpvoteThreadClick = useCallback(async () => {
     try {
-      await upVote(id).unwrap();
+      if (hasUpvotedThread) {
+        await neutralizeVoteThread(threadID).unwrap();
+      } else {
+        await upvoteThread(threadID).unwrap();
+      }
+
       refetch();
     } catch {
       notyf.error("Ada sesuatu yang salah");
     }
-  }, [upVote, id, notyf, refetch]);
+  }, [
+    hasUpvotedThread,
+    refetch,
+    neutralizeVoteThread,
+    notyf,
+    threadID,
+    upvoteThread,
+  ]);
+
+  const [downvoteComment] = useDownvoteCommentMutation();
+
+  const handleCommentDownvote = useCallback(
+    async (commentID: string) => {
+      try {
+        await downvoteComment({ commentID, threadID }).unwrap();
+        refetch();
+      } catch {
+        notyf.error("Ada sesuatu yang salah");
+      }
+    },
+    [downvoteComment, notyf, refetch, threadID],
+  );
+
+  const [upvoteComment] = useUpvoteCommentMutation();
+
+  const handleCommentUpvote = useCallback(
+    async (commentID: string) => {
+      try {
+        await upvoteComment({ commentID, threadID }).unwrap();
+        refetch();
+      } catch {
+        notyf.error("Ada sesuatu yang salah");
+      }
+    },
+    [refetch, threadID, upvoteComment, notyf],
+  );
+
+  const [neutralizeVoteComment] = useNeutralizeVoteCommentMutation();
+
+  const handleCommentVoteNeutralize = useCallback(
+    async (commentID: string) => {
+      try {
+        await neutralizeVoteComment({ commentID, threadID }).unwrap();
+        refetch();
+      } catch {
+        notyf.error("Ada sesuatu yang salah");
+      }
+    },
+    [refetch, neutralizeVoteComment, threadID, notyf],
+  );
 
   return {
     formState,
+    handleCommentDownvote,
     handleCommentFormSubmit,
-    handleDownVoteClick,
+    handleCommentUpvote,
+    handleCommentVoteNeutralize,
+    handleDownvoteThreadClick,
     handleSubmit,
-    handleUpVoteClick,
+    handleUpvoteThreadClick,
+    hasDownvotedThread,
+    hasUpvotedThread,
     isCommentLoading,
     isThreadLoading,
     register,

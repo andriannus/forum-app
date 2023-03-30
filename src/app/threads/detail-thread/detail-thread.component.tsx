@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 import { FC } from "react";
 import { Facebook as Loader } from "react-content-loader";
 
@@ -12,10 +13,15 @@ import "./detail-thread.component.scss";
 const DetailThread: FC = () => {
   const {
     formState,
+    handleCommentDownvote,
     handleCommentFormSubmit,
-    handleDownVoteClick,
+    handleCommentUpvote,
+    handleCommentVoteNeutralize,
+    handleDownvoteThreadClick,
     handleSubmit,
-    handleUpVoteClick,
+    handleUpvoteThreadClick,
+    hasDownvotedThread,
+    hasUpvotedThread,
     isCommentLoading,
     isThreadLoading,
     register,
@@ -53,20 +59,24 @@ const DetailThread: FC = () => {
 
             <div className="DetailThread-actions">
               <button
-                id="BtnUpVote"
-                className="DetailThread-action"
+                id="BtnUpvoteThread"
+                className={classNames("DetailThread-action", {
+                  "is-active": hasUpvotedThread,
+                })}
                 type="button"
-                onClick={handleUpVoteClick}
+                onClick={handleUpvoteThreadClick}
               >
                 <FontAwesomeIcon icon="thumbs-up" />
                 <span>{thread?.upVotesBy.length}</span>
               </button>
 
               <button
-                id="BtnDownVote"
-                className="DetailThread-action"
+                id="BtnDownvoteComment"
+                className={classNames("DetailThread-action", {
+                  "is-active": hasDownvotedThread,
+                })}
                 type="button"
-                onClick={handleDownVoteClick}
+                onClick={handleDownvoteThreadClick}
               >
                 <FontAwesomeIcon icon="thumbs-down" />
                 <span>{thread?.downVotesBy.length}</span>
@@ -78,7 +88,12 @@ const DetailThread: FC = () => {
               </div>
             </div>
 
-            <Comments items={thread?.comments} />
+            <Comments
+              items={thread?.comments}
+              onDownvote={handleCommentDownvote}
+              onNeutralize={handleCommentVoteNeutralize}
+              onUpvote={handleCommentUpvote}
+            />
 
             <form
               className="DetailThread-commentSection"
