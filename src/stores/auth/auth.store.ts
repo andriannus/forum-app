@@ -10,11 +10,12 @@ import {
   User,
 } from "@/models";
 
-import { AuthState } from "./auth.model";
+import { RootState } from "../store";
+import { AuthState, ProfileResponse } from "./auth.model";
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: { token: null } as AuthState,
+  initialState: { token: null, user: null } as AuthState,
   reducers: {
     setCredentials: (state, { payload }: PayloadAction<string>) => {
       state.token = payload;
@@ -22,15 +23,42 @@ export const authSlice = createSlice({
     removeCredentials: (state) => {
       state.token = null;
     },
+    setProfile: (state, { payload }: PayloadAction<User | null>) => {
+      state.user = payload;
+    },
+    removeProfile: (state) => {
+      state.user = null;
+    },
   },
 });
 
-export const { removeCredentials, setCredentials } = authSlice.actions;
+export const { removeCredentials, removeProfile, setCredentials, setProfile } =
+  authSlice.actions;
 
 export const authAPI = createApi({
   reducerPath: "authAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: API.BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API.BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const { token } = (getState() as RootState).auth;
+
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
+  }),
   endpoints: (build) => ({
+    getProfile: build.mutation<User, void>({
+      query: () => ({
+        url: "users/me",
+        method: "GET",
+      }),
+      transformResponse: (response: ProfileResponse) => {
+        return response.data.user;
+      },
+    }),
     login: build.mutation<string, LoginRequest>({
       query: (payload) => ({
         url: "login",
@@ -54,4 +82,5 @@ export const authAPI = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authAPI;
+export const { useGetProfileMutation, useLoginMutation, useRegisterMutation } =
+  authAPI;
