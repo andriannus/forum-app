@@ -14,11 +14,12 @@ import storage from "redux-persist/lib/storage";
 
 import { authAPI, authSlice } from "./auth";
 import { leaderboardsAPI } from "./leaderboards";
-import { threadsAPI } from "./threads";
+import { threadsAPI, threadsSlice } from "./threads";
 import { userAPI } from "./user";
 
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
+  threads: threadsSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
   [leaderboardsAPI.reducerPath]: leaderboardsAPI.reducer,
   [threadsAPI.reducerPath]: threadsAPI.reducer,

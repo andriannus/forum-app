@@ -1,43 +1,30 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import { List as Loader } from "react-content-loader";
 import { Link } from "react-router-dom";
 
-import { useGetThreadsQuery, useGetUsersQuery } from "@/stores";
 import { transformToDistanceFormat } from "@/utils";
+
+import { FilterThreads } from "./components";
+import { useThreads } from "./threads.hook";
 
 import "./threads.component.scss";
 
 const Threads: FC = () => {
-  const { data: threads, isLoading: isThreadsLoading } = useGetThreadsQuery(
-    undefined,
-    { refetchOnMountOrArgChange: true },
-  );
-
-  const { data: users, isLoading: isUsersLoading } = useGetUsersQuery(
-    undefined,
-    { refetchOnMountOrArgChange: true },
-  );
-
-  const getOwnerName = useCallback(
-    (ownerID: string) => {
-      if (!users) return "-";
-
-      const owner = users.find((user) => user.id === ownerID);
-      return owner?.name;
-    },
-    [users],
-  );
+  const { filteredThreads, getOwnerName, isThreadsLoading, isUsersLoading } =
+    useThreads();
 
   return (
     <div className="Threads">
+      <FilterThreads />
+
       <h2 className="Threads-headline">Mau Diskusi Apa?</h2>
 
       {isThreadsLoading ? (
         <Loader />
       ) : (
         <div className="ThreadsList" role="list">
-          {threads?.map((thread) => {
+          {filteredThreads?.map((thread) => {
             return (
               <Link
                 key={thread.id}

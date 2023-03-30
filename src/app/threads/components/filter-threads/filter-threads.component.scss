@@ -1,0 +1,9 @@
+.FilterThreads {
+  @apply flex flex-nowrap mb-bs overflow-auto;
+
+  > * {
+    &:not(:last-child) {
+      @apply mr-2xs;
+    }
+  }
+}

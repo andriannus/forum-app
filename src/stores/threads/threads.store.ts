@@ -1,3 +1,4 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
@@ -14,8 +15,36 @@ import {
   ThreadDetail,
   ThreadDetailResponse,
   ThreadsResponse,
+  ThreadsState,
   ThreadVoteResponse,
 } from "./threads.model";
+
+export const threadsSlice = createSlice({
+  name: "threads",
+  initialState: {
+    categories: null,
+    filteredThreads: null,
+    selectedCategory: null,
+    threads: null,
+  } as ThreadsState,
+  reducers: {
+    setCategories: (state, { payload }: PayloadAction<string[]>) => {
+      state.categories = payload;
+    },
+    selectCategory: (state, { payload }: PayloadAction<string>) => {
+      state.selectedCategory = payload;
+    },
+    setThreads: (state, { payload }: PayloadAction<Thread[]>) => {
+      state.threads = payload;
+    },
+    setFilteredThreads: (state, { payload }: PayloadAction<Thread[]>) => {
+      state.filteredThreads = payload;
+    },
+  },
+});
+
+export const { selectCategory, setCategories, setFilteredThreads, setThreads } =
+  threadsSlice.actions;
 
 export const threadsAPI = createApi({
   reducerPath: "threadsAPI",
@@ -36,8 +65,11 @@ export const threadsAPI = createApi({
         return response.data.detailThread;
       },
     }),
-    getThreads: build.query<Thread[], void>({
-      query: () => "threads",
+    getThreads: build.mutation<Thread[], void>({
+      query: () => ({
+        url: "threads",
+        method: "GET",
+      }),
       transformResponse: (response: ThreadsResponse) => {
         return response.data.threads;
       },
@@ -110,7 +142,7 @@ export const {
   useDownvoteThreadMutation,
   useDownvoteCommentMutation,
   useGetThreadQuery,
-  useGetThreadsQuery,
+  useGetThreadsMutation,
   useNeutralizeVoteCommentMutation,
   useNeutralizeVoteThreadMutation,
   useUpvoteCommentMutation,

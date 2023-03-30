@@ -37,7 +37,10 @@ export type ThreadDetailResponse = ResponseWithData<{
 }>;
 
 export interface ThreadsState {
-  threads: Thread[];
+  categories: string[] | null;
+  selectedCategory: string | null;
+  threads: Thread[] | null;
+  filteredThreads: Thread[] | null;
 }
 
 export interface ThreadCreateRequest {
