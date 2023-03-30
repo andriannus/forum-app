@@ -6,14 +6,8 @@ import { useNotyf } from "@/context";
 import { ThreadCreateRequest, useCreateThreadMutation } from "@/stores";
 
 export function useCreateThread() {
-  const navigate = useNavigate();
-  const notyf = useNotyf();
-  const [createThread, { isLoading }] = useCreateThreadMutation();
-
   const { formState, handleSubmit, register, watch } =
-    useForm<ThreadCreateRequest>({
-      mode: "onChange",
-    });
+    useForm<ThreadCreateRequest>({ mode: "onChange" });
 
   const [values, setValues] = useState({} as Partial<ThreadCreateRequest>);
 
@@ -21,6 +15,10 @@ export function useCreateThread() {
     const subscription = watch(setValues);
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  const navigate = useNavigate();
+  const notyf = useNotyf();
+  const [createThread, { isLoading }] = useCreateThreadMutation();
 
   const handleCreateThreadFormSubmit: SubmitHandler<ThreadCreateRequest> =
     useCallback(

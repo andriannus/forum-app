@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useCallback } from "react";
-import { List as ListLoader } from "react-content-loader";
+import { List as Loader } from "react-content-loader";
 import { Link } from "react-router-dom";
 
 import { useGetThreadsQuery, useGetUsersQuery } from "@/stores";
@@ -34,7 +34,7 @@ const Threads: FC = () => {
       <h2 className="Threads-headline">Mau Diskusi Apa?</h2>
 
       {isThreadsLoading ? (
-        <ListLoader />
+        <Loader />
       ) : (
         <div className="ThreadsList" role="list">
           {threads?.map((thread) => {

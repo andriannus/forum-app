@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { List as ListLoader } from "react-content-loader";
+import { List as Loader } from "react-content-loader";
 
 import { useGetLeaderboardsQuery } from "@/stores";
 
@@ -13,7 +13,7 @@ const Leaderboards: FC = () => {
       <h2 className="Leaderboards-headline">Klasemen Pengguna Aktif</h2>
 
       {isLoading ? (
-        <ListLoader />
+        <Loader />
       ) : (
         <>
           <div className="Leaderboards-heading">

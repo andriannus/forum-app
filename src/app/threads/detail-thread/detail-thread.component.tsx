@@ -107,6 +107,7 @@ const DetailThread: FC = () => {
               />
 
               <Button
+                id="BtnSubmit"
                 color="primary"
                 disabled={!formState.isValid || isCommentLoading}
                 fullWidth

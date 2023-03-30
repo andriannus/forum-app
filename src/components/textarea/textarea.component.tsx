@@ -1,20 +1,9 @@
 import PropTypes from "prop-types";
-import { ChangeEvent, ChangeEventHandler, forwardRef, useEffect } from "react";
+import { ChangeEvent, forwardRef, useEffect } from "react";
+
+import { TextAreaProps } from "./textarea.model";
 
 import "./textarea.component.scss";
-
-interface TextAreaProps {
-  autoCapitalize: string;
-  autoComplete: string;
-  className: string;
-  disabled: boolean;
-  id: string;
-  name: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
-  placeholder: string;
-  readOnly: boolean;
-  value: string;
-}
 
 const TextArea = forwardRef<HTMLTextAreaElement, Partial<TextAreaProps>>(
   (

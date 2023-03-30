@@ -18,6 +18,7 @@ import {
 
 export function useDetailThread() {
   const { id: threadID = "" } = useParams();
+
   const {
     data: thread,
     isLoading: isThreadLoading,
@@ -41,8 +42,6 @@ export function useDetailThread() {
   const [createComment, { isLoading: isCommentLoading }] =
     useCreateCommentMutation();
 
-  const notyf = useNotyf();
-
   const { formState, handleSubmit, register, resetField, watch } =
     useForm<ThreadCommentRequest>({
       mode: "onChange",
@@ -58,6 +57,8 @@ export function useDetailThread() {
     const subscription = watch(setValues);
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  const notyf = useNotyf();
 
   const handleCommentFormSubmit: SubmitHandler<ThreadCommentRequest> =
     useCallback(

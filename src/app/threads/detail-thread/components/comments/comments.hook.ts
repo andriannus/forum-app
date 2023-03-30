@@ -8,7 +8,7 @@ export function useComments() {
   const getDownvotedStatus = useCallback(
     (comment: ThreadComment) => {
       if (!profile) return false;
-      return comment.downVotesBy.includes(profile?.id);
+      return comment.downVotesBy.includes(profile.id);
     },
     [profile],
   );
@@ -16,7 +16,7 @@ export function useComments() {
   const getUpvotedStatus = useCallback(
     (comment: ThreadComment) => {
       if (!profile) return false;
-      return comment.upVotesBy.includes(profile?.id);
+      return comment.upVotesBy.includes(profile.id);
     },
     [profile],
   );

@@ -12,8 +12,8 @@ import { CommentsProps } from "./comments.model";
 import "./comments.component.scss";
 
 const Comments: FC<Partial<CommentsProps>> = ({
-  onDownvote = () => null,
   items = [],
+  onDownvote = () => null,
   onNeutralize = () => null,
   onUpvote = () => null,
 }) => {
