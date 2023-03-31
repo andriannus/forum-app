@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, memo, useCallback } from "react";
+import { memo, useCallback } from "react";
+import type { FC } from "react";
 import { NavLink } from "react-router-dom";
 
 import { MENUS } from "./bottom-navigation-bar.constant";

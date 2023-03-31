@@ -1,15 +1,15 @@
 import { lazy } from "react";
-import { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
 
 import { Authenticated } from "@/app/auth/components";
 import { Mobile, MobileWithBottomNav } from "@/layouts";
 
-const Threads = lazy(() => import("./threads.component"));
+const Threads = lazy(async () => await import("./threads.component"));
 const CreateThread = lazy(
-  () => import("./create-thread/create-thread.component"),
+  async () => await import("./create-thread/create-thread.component"),
 );
 const DetailThread = lazy(
-  () => import("./detail-thread/detail-thread.component"),
+  async () => await import("./detail-thread/detail-thread.component"),
 );
 
 export const threadsRoutes: RouteObject[] = [

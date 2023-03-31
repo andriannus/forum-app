@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { useRoutes } from "react-router-dom";
 
 import { authRoutes } from "@/app/auth";

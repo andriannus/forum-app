@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 
-import { ChipProps } from "./chip.model";
+import type { ChipProps } from "./chip.model";
 
 import "./chip.component.scss";
 

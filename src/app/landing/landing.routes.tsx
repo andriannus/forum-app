@@ -1,10 +1,10 @@
 import { lazy } from "react";
-import { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
 
 import { Guest } from "@/app/auth/components";
 import { Mobile } from "@/layouts";
 
-const Landing = lazy(() => import("./landing.component"));
+const Landing = lazy(async () => await import("./landing.component"));
 
 export const landingRoutes: RouteObject[] = [
   {

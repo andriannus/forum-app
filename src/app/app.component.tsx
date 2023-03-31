@@ -1,4 +1,5 @@
-import { FC, Suspense } from "react";
+import { Suspense } from "react";
+import type { FC } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";

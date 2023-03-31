@@ -1,4 +1,4 @@
-import { ResponseWithData, User } from "@/models";
+import type { ResponseWithData, User } from "@/models";
 
 export interface ThreadInGeneral {
   id: string;

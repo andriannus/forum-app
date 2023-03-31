@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 import { useNotyf } from "@/context";
 import {
-  ThreadCommentRequest,
   useAppSelector,
   useCreateCommentMutation,
   useDownvoteCommentMutation,
@@ -15,8 +15,11 @@ import {
   useUpvoteCommentMutation,
   useUpvoteThreadMutation,
 } from "@/stores";
+import type { ThreadCommentRequest } from "@/stores";
 
-export function useDetailThread() {
+import type { UseDetailThread } from "./detail-thread.model";
+
+export function useDetailThread(): UseDetailThread {
   const { id: threadID = "" } = useParams();
 
   const {
@@ -51,7 +54,7 @@ export function useDetailThread() {
       },
     });
 
-  const [values, setValues] = useState({} as Partial<ThreadCommentRequest>);
+  const [values, setValues] = useState<Partial<ThreadCommentRequest>>({});
 
   useEffect(() => {
     const subscription = watch(setValues);

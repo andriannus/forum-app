@@ -13,7 +13,9 @@ import {
   useGetUsersQuery,
 } from "@/stores";
 
-export function useThreads() {
+import type { UseThreads } from "./threads.model";
+
+export function useThreads(): UseThreads {
   const notyf = useNotyf();
   const dispatch = useDispatch();
   const [getThreads, { isLoading: isThreadsLoading }] = useGetThreadsMutation();
@@ -37,7 +39,7 @@ export function useThreads() {
   }, [dispatch, getThreads, notyf]);
 
   useEffect(() => {
-    handleMounted();
+    void handleMounted();
   }, [handleMounted]);
 
   const { data: users, isLoading: isUsersLoading } = useGetUsersQuery(

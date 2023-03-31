@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
-import {
+import type {
   LoginRequest,
   LoginResponse,
   RegisterResponse,
@@ -10,8 +11,8 @@ import {
   User,
 } from "@/models";
 
-import { RootState } from "../store";
-import { AuthState, ProfileResponse } from "./auth.model";
+import type { RootState } from "../store";
+import type { AuthState, ProfileResponse } from "./auth.model";
 
 export const authSlice = createSlice({
   name: "auth",

@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
 
-import { RootState } from "../store";
-import {
+import type { RootState } from "../store";
+import type {
   Thread,
   ThreadCommentRequest,
   ThreadCommentResponse,
@@ -53,7 +54,7 @@ export const threadsAPI = createApi({
     prepareHeaders: (headers, { getState }) => {
       const { token } = (getState() as RootState).auth;
 
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token as string}`);
 
       return headers;
     },

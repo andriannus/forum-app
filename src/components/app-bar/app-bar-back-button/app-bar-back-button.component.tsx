@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import { FC, memo, useCallback } from "react";
+import { memo, useCallback } from "react";
+import type { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./app-bar-back-button.component.scss";

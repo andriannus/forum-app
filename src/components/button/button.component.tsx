@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC, memo, PropsWithChildren, useMemo } from "react";
+import { memo, useMemo } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 
-import { ButtonProps } from "./button.model";
+import type { ButtonProps } from "./button.model";
 
 import "./button.component.scss";
 
@@ -24,10 +25,10 @@ const Button: FC<PropsWithChildren<Partial<ButtonProps>>> = ({
 
   const buttonClasses = classNames("Button", {
     [`Button--${color}`]: !!color,
-    ["Button--fullWidth"]: fullWidth,
-    ["Button--outlined"]: outlined,
-    ["Button--rounded"]: rounded,
-    ["Button--small"]: small,
+    "Button--fullWidth": fullWidth,
+    "Button--outlined": outlined,
+    "Button--rounded": rounded,
+    "Button--small": small,
   });
 
   return (

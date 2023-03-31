@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { List as Loader } from "react-content-loader";
 
 import { useGetLeaderboardsQuery } from "@/stores";

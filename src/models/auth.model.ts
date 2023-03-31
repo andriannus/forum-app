@@ -1,4 +1,4 @@
-import { ResponseWithData } from "./api.model";
+import type { ResponseWithData } from "./api.model";
 
 export interface LoginRequest {
   email: string;

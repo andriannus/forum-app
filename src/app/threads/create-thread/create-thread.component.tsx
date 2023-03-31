@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { AppBar, Button, Scaffold, TextArea, TextField } from "@/components";
 

@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { API } from "@/constants";
-import { ResponseWithData } from "@/models";
+import type { ResponseWithData } from "@/models";
 
-import { Leaderboard } from "./leaderboards.model";
+import type { Leaderboard } from "./leaderboards.model";
 
 export const leaderboardsAPI = createApi({
   reducerPath: "leaderboardsAPI",

@@ -1,14 +1,12 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  useAppSelector,
-  selectCategory,
-  setFilteredThreads,
-  Thread,
-} from "@/stores";
+import { useAppSelector, selectCategory, setFilteredThreads } from "@/stores";
+import type { Thread } from "@/stores";
 
-export function useFilterThreads() {
+import type { UseFilterThreads } from "./filter-threads.model";
+
+export function useFilterThreads(): UseFilterThreads {
   const { selectedCategory } = useAppSelector((state) => state.threads);
 
   const getChipActiveStatus = useCallback(

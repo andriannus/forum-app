@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC, useCallback } from "react";
+import { useCallback } from "react";
+import type { FC } from "react";
 
-import { ThreadComment } from "@/stores";
+import type { ThreadComment } from "@/stores";
 
 import { Owner } from "../owner";
 import { useComments } from "./comments.hook";
-import { CommentsProps } from "./comments.model";
+import type { CommentsProps } from "./comments.model";
 
 import "./comments.component.scss";
 
@@ -23,8 +24,12 @@ const Comments: FC<Partial<CommentsProps>> = ({
     (comment: ThreadComment) => {
       const hasDownvoteComment = getDownvotedStatus(comment);
 
-      if (hasDownvoteComment) return onNeutralize(comment.id);
-      return onDownvote(comment.id);
+      if (hasDownvoteComment) {
+        onNeutralize(comment.id);
+        return;
+      }
+
+      onDownvote(comment.id);
     },
     [getDownvotedStatus, onDownvote, onNeutralize],
   );
@@ -33,8 +38,11 @@ const Comments: FC<Partial<CommentsProps>> = ({
     (comment: ThreadComment) => {
       const hasUpvotedComment = getUpvotedStatus(comment);
 
-      if (hasUpvotedComment) return onNeutralize(comment.id);
-      return onUpvote(comment.id);
+      if (hasUpvotedComment) {
+        onNeutralize(comment.id);
+        return;
+      }
+      onUpvote(comment.id);
     },
     [getUpvotedStatus, onNeutralize, onUpvote],
   );
@@ -62,7 +70,9 @@ const Comments: FC<Partial<CommentsProps>> = ({
                   "is-active": getUpvotedStatus(item),
                 })}
                 type="button"
-                onClick={() => handleUpvoteButtonClick(item)}
+                onClick={() => {
+                  handleUpvoteButtonClick(item);
+                }}
               >
                 <FontAwesomeIcon icon="thumbs-up" />
                 <span>{item?.upVotesBy.length}</span>
@@ -74,7 +84,9 @@ const Comments: FC<Partial<CommentsProps>> = ({
                   "is-active": getDownvotedStatus(item),
                 })}
                 type="button"
-                onClick={() => handleDownvoteButtonClick(item)}
+                onClick={() => {
+                  handleDownvoteButtonClick(item);
+                }}
               >
                 <FontAwesomeIcon icon="thumbs-down" />
                 <span>{item?.downVotesBy.length}</span>

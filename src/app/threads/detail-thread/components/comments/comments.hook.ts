@@ -1,8 +1,11 @@
 import { useCallback } from "react";
 
-import { ThreadComment, useAppSelector } from "@/stores";
+import { useAppSelector } from "@/stores";
+import type { ThreadComment } from "@/stores";
 
-export function useComments() {
+import type { UseComments } from "./comments.model";
+
+export function useComments(): UseComments {
   const profile = useAppSelector((state) => state.auth.user);
 
   const getDownvotedStatus = useCallback(

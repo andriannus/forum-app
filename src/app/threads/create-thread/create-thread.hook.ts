@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { useNotyf } from "@/context";
-import { ThreadCreateRequest, useCreateThreadMutation } from "@/stores";
+import { useCreateThreadMutation } from "@/stores";
+import type { ThreadCreateRequest } from "@/stores";
 
-export function useCreateThread() {
+import type { UseCreateThread } from "./create-thread.model";
+
+export function useCreateThread(): UseCreateThread {
   const { formState, handleSubmit, register, watch } =
     useForm<ThreadCreateRequest>({ mode: "onChange" });
 
-  const [values, setValues] = useState({} as Partial<ThreadCreateRequest>);
+  const [values, setValues] = useState<Partial<ThreadCreateRequest>>({});
 
   useEffect(() => {
     const subscription = watch(setValues);

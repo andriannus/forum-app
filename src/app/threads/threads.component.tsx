@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC } from "react";
+import type { FC } from "react";
 import { List as Loader } from "react-content-loader";
 import { Link } from "react-router-dom";
 
@@ -29,7 +29,7 @@ const Threads: FC = () => {
               <Link
                 key={thread.id}
                 className="ThreadsList-item"
-                to={`/threads/${thread.id}`}
+                to={`/threads/${thread.id as string}`}
               >
                 <h6 className="ThreadsList-title">{thread.title}</h6>
 

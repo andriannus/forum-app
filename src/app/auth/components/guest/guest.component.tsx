@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
 import { useAppSelector } from "@/stores";

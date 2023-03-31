@@ -1,4 +1,4 @@
-import { ResponseWithData } from "@/models";
+import type { ResponseWithData } from "@/models";
 
 export interface User {
   id: string;

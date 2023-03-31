@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { Chip } from "@/components";
 
@@ -21,7 +21,9 @@ const FilterThreads: FC = () => {
             active={getChipActiveStatus(category)}
             button
             small
-            onClick={() => handleChipClick(category)}
+            onClick={() => {
+              handleChipClick(category);
+            }}
           >
             #{category}
           </Chip>

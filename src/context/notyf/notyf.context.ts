@@ -7,4 +7,4 @@ const NotyfContext = createContext(
   }),
 );
 
-export const useNotyf = () => useContext(NotyfContext);
+export const useNotyf = (): Notyf => useContext(NotyfContext);

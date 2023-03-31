@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { FC } from "react";
+import type { FC } from "react";
 import { Facebook as Loader } from "react-content-loader";
 
 import { AppBar, Button, Scaffold, TextArea } from "@/components";

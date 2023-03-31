@@ -1,9 +1,13 @@
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { useCallback, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { LoginRequest } from "@/models";
+import { HTTP_STATUS_CODES } from "@/constants";
+import { useNotyf } from "@/context";
+import type { LoginRequest } from "@/models";
 import {
   useLoginMutation,
   useGetProfileMutation,
@@ -11,18 +15,21 @@ import {
   setProfile,
 } from "@/stores";
 
-export function useLogin() {
+import type { UseLogin } from "./login.model";
+
+export function useLogin(): UseLogin {
   const { formState, handleSubmit, register, watch } = useForm<LoginRequest>({
     mode: "onChange",
   });
 
-  const [values, setValues] = useState({} as Partial<LoginRequest>);
+  const [values, setValues] = useState<Partial<LoginRequest>>({});
 
   useEffect(() => {
     const subscription = watch(setValues);
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  const notyf = useNotyf();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
@@ -39,10 +46,17 @@ export function useLogin() {
 
         navigate("/threads");
       } catch (error) {
-        console.error(error);
+        const { status } = error as FetchBaseQueryError;
+
+        if (status === HTTP_STATUS_CODES.UNAUTHORIZED) {
+          notyf.error("Email atau password salah");
+          return;
+        }
+
+        notyf.error("Ada sesuatu yang salah");
       }
     },
-    [dispatch, getProfile, login, navigate],
+    [dispatch, getProfile, login, navigate, notyf],
   );
 
   return {

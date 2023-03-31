@@ -1,4 +1,4 @@
-import { BottomNavigationBarMenu } from "./bottom-navigation-bar.model";
+import type { BottomNavigationBarMenu } from "./bottom-navigation-bar.model";
 
 export const MENUS: BottomNavigationBarMenu[] = [
   {

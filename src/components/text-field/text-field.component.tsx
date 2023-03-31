@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { ChangeEvent, forwardRef, useCallback, useMemo } from "react";
+import { forwardRef, useCallback, useMemo } from "react";
+import type { ChangeEvent } from "react";
 
-import { TextFieldProps } from "./text-field.model";
+import type { TextFieldProps } from "./text-field.model";
 
 import "./text-field.component.scss";
 

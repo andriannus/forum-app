@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { removeCredentials, removeProfile, useAppSelector } from "@/stores";
 
-export function useProfile() {
+import type { UseProfile } from "./profile.model";
+
+export function useProfile(): UseProfile {
   const profile = useAppSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();

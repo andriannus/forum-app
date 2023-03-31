@@ -1,4 +1,4 @@
-import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
+import type { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 
 export interface TextFieldProps {
   autoComplete: string;

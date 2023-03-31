@@ -1,8 +1,9 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC, memo } from "react";
+import { memo } from "react";
+import type { FC } from "react";
 
-import { BannerProps } from "./banner.model";
+import type { BannerProps } from "./banner.model";
 
 import "./banner.component.scss";
 

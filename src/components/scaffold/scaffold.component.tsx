@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 
-import { ScaffoldProps } from "./scaffold.model";
+import type { ScaffoldProps } from "./scaffold.model";
 
 import "./scaffold.component.scss";
 

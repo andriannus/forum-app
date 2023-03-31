@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { FC, memo, PropsWithChildren } from "react";
+import { memo } from "react";
+import type { FC, PropsWithChildren } from "react";
 
 import "./app-bar-title.component.scss";
 

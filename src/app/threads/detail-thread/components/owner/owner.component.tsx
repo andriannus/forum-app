@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { FC, memo } from "react";
+import { memo } from "react";
+import type { FC } from "react";
 
 import { transformToDistanceFormat } from "@/utils";
 
-import { OwnerProps } from "./owner.model";
+import type { OwnerProps } from "./owner.model";
 
 import "./owner.component.scss";
 

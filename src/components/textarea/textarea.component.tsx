@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { ChangeEvent, forwardRef, useEffect } from "react";
+import { forwardRef, useEffect } from "react";
+import type { ChangeEvent } from "react";
 
-import { TextAreaProps } from "./textarea.model";
+import type { TextAreaProps } from "./textarea.model";
 
 import "./textarea.component.scss";
 
