@@ -21,6 +21,7 @@ const TextField = forwardRef<HTMLInputElement, Partial<TextFieldProps>>(
       readOnly = false,
       type = "text",
       value = "",
+      ...props
     },
     ref,
   ) => {
@@ -52,6 +53,7 @@ const TextField = forwardRef<HTMLInputElement, Partial<TextFieldProps>>(
           type={type}
           value={value}
           onChange={handleOnChange}
+          {...props}
         />
 
         {!!counter && (

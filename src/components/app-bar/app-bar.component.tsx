@@ -9,7 +9,11 @@ import { AppBarTitle } from "./app-bar-title";
 import "./app-bar.component.scss";
 
 const AppBar: FC<PropsWithChildren> = ({ children }) => {
-  return <div className="AppBar">{children}</div>;
+  return (
+    <div data-cy="app-bar" className="AppBar">
+      {children}
+    </div>
+  );
 };
 
 AppBar.propTypes = {

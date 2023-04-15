@@ -33,6 +33,7 @@ const Login: FC = () => {
 
             <TextField
               id="TxtEmail"
+              data-cy="input-email"
               autoCapitalize="off"
               autoComplete="email"
               className="mx-bs my-md"
@@ -47,6 +48,7 @@ const Login: FC = () => {
 
             <TextField
               id="TxtPassword"
+              data-cy="input-password"
               autoComplete="current-password"
               className="mx-bs"
               placeholder="Password"
@@ -58,6 +60,7 @@ const Login: FC = () => {
 
           <Button
             id="BtnSubmit"
+            data-cy="button-submit"
             color="primary"
             disabled={isLoading || !formState.isValid}
             fullWidth

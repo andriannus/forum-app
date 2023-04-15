@@ -20,6 +20,7 @@ const Button: FC<PropsWithChildren<Partial<ButtonProps>>> = ({
   small = false,
   to = "",
   type = "button",
+  ...props
 }) => {
   const hasURL = useMemo(() => !!to, [to]);
 
@@ -34,7 +35,7 @@ const Button: FC<PropsWithChildren<Partial<ButtonProps>>> = ({
   return (
     <>
       {hasURL && (
-        <Link className={buttonClasses} to={to}>
+        <Link className={buttonClasses} to={to} {...props}>
           {children}
         </Link>
       )}
@@ -46,6 +47,7 @@ const Button: FC<PropsWithChildren<Partial<ButtonProps>>> = ({
           disabled={disabled}
           type={type}
           onClick={onClick}
+          {...props}
         >
           {children}
         </button>
