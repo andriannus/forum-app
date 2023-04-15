@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { List as Loader } from "react-content-loader";
 import { Link } from "react-router-dom";
 
+import { SEO } from "@/components";
 import { transformToDistanceFormat } from "@/utils";
 
 import { FilterThreads } from "./components";
@@ -15,47 +16,51 @@ const Threads: FC = () => {
     useThreads();
 
   return (
-    <div className="Threads">
-      <FilterThreads />
+    <>
+      <SEO title="Mau Diskusi Apa? - We The Thread" />
 
-      <h2 className="Threads-headline">Mau Diskusi Apa?</h2>
+      <div className="Threads">
+        <FilterThreads />
 
-      {isThreadsLoading ? (
-        <Loader />
-      ) : (
-        <div className="ThreadsList" role="list">
-          {filteredThreads?.map((thread) => {
-            return (
-              <Link
-                key={thread.id}
-                className="ThreadsList-item"
-                to={`/threads/${thread.id as string}`}
-              >
-                <h6 className="ThreadsList-title">{thread.title}</h6>
+        <h2 className="Threads-headline">Mau Diskusi Apa?</h2>
 
-                {!isUsersLoading && (
-                  <p className="ThreadsList-subtitle">
-                    {getOwnerName(thread.ownerId)}
-                  </p>
-                )}
+        {isThreadsLoading ? (
+          <Loader />
+        ) : (
+          <div className="ThreadsList" role="list">
+            {filteredThreads?.map((thread) => {
+              return (
+                <Link
+                  key={thread.id}
+                  className="ThreadsList-item"
+                  to={`/threads/${thread.id as string}`}
+                >
+                  <h6 className="ThreadsList-title">{thread.title}</h6>
 
-                <div className="ThreadsList-info">
-                  <div className="ThreadsList-infoItem">
-                    <FontAwesomeIcon icon="comments" />
-                    <span>{thread.totalComments}</span>
+                  {!isUsersLoading && (
+                    <p className="ThreadsList-subtitle">
+                      {getOwnerName(thread.ownerId)}
+                    </p>
+                  )}
+
+                  <div className="ThreadsList-info">
+                    <div className="ThreadsList-infoItem">
+                      <FontAwesomeIcon icon="comments" />
+                      <span>{thread.totalComments}</span>
+                    </div>
+
+                    <div className="ThreadsList-infoItem">
+                      <FontAwesomeIcon icon="clock" />
+                      <span>{transformToDistanceFormat(thread.createdAt)}</span>
+                    </div>
                   </div>
-
-                  <div className="ThreadsList-infoItem">
-                    <FontAwesomeIcon icon="clock" />
-                    <span>{transformToDistanceFormat(thread.createdAt)}</span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      )}
-    </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

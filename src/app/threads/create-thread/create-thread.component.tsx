@@ -1,6 +1,13 @@
 import type { FC } from "react";
 
-import { AppBar, Button, Scaffold, TextArea, TextField } from "@/components";
+import {
+  AppBar,
+  Button,
+  SEO,
+  Scaffold,
+  TextArea,
+  TextField,
+} from "@/components";
 
 import { useCreateThread } from "./create-thread.hook";
 
@@ -17,55 +24,59 @@ const CreateThread: FC = () => {
   } = useCreateThread();
 
   return (
-    <Scaffold
-      appBar={
-        <AppBar>
-          <AppBar.BackButton to="/threads" />
-          <AppBar.Title>Membuat Diskusi</AppBar.Title>
-        </AppBar>
-      }
-    >
-      <form
-        className="CreateThread"
-        onSubmit={handleSubmit(handleCreateThreadFormSubmit)}
+    <>
+      <SEO title="Membuat Diskusi - We The Thread" />
+
+      <Scaffold
+        appBar={
+          <AppBar>
+            <AppBar.BackButton to="/threads" />
+            <AppBar.Title>Membuat Diskusi</AppBar.Title>
+          </AppBar>
+        }
       >
-        <div className="CreateThread-body">
-          <TextField
-            id="TxtTitle"
-            className="my-md"
-            placeholder="Judul"
-            value={values.title}
-            {...register("title", { required: true })}
-          />
-
-          <TextField
-            id="TxtCategory"
-            className="mb-md"
-            placeholder="Kategori"
-            value={values.category}
-            {...register("category")}
-          />
-
-          <TextArea
-            id="TxtBody"
-            className="mb-bs"
-            placeholder="Mau diskusi tentang apa?"
-            value={values.body}
-            {...register("body", { required: true })}
-          />
-        </div>
-
-        <Button
-          id="BtnSubmit"
-          color="primary"
-          disabled={isLoading || !formState.isValid}
-          fullWidth
-          type="submit"
+        <form
+          className="CreateThread"
+          onSubmit={handleSubmit(handleCreateThreadFormSubmit)}
         >
-          {isLoading ? "Sedang memuat..." : "Simpan"}
-        </Button>
-      </form>
-    </Scaffold>
+          <div className="CreateThread-body">
+            <TextField
+              id="TxtTitle"
+              className="my-md"
+              placeholder="Judul"
+              value={values.title}
+              {...register("title", { required: true })}
+            />
+
+            <TextField
+              id="TxtCategory"
+              className="mb-md"
+              placeholder="Kategori"
+              value={values.category}
+              {...register("category")}
+            />
+
+            <TextArea
+              id="TxtBody"
+              className="mb-bs"
+              placeholder="Mau diskusi tentang apa?"
+              value={values.body}
+              {...register("body", { required: true })}
+            />
+          </div>
+
+          <Button
+            id="BtnSubmit"
+            color="primary"
+            disabled={isLoading || !formState.isValid}
+            fullWidth
+            type="submit"
+          >
+            {isLoading ? "Sedang memuat..." : "Simpan"}
+          </Button>
+        </form>
+      </Scaffold>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import type { FC } from "react";
 import { Facebook as Loader } from "react-content-loader";
 
-import { AppBar, Button, Scaffold, TextArea } from "@/components";
+import { AppBar, Button, SEO, Scaffold, TextArea } from "@/components";
 
 import { Comments, Owner } from "./components";
 import { useDetailThread } from "./detail-thread.hook";
@@ -30,97 +30,101 @@ const DetailThread: FC = () => {
   } = useDetailThread();
 
   return (
-    <Scaffold
-      appBar={
-        <AppBar>
-          <AppBar.BackButton to="/threads" />
-        </AppBar>
-      }
-    >
-      <div className="DetailThread">
-        {isThreadLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <Owner
-              avatar={thread?.owner?.avatar}
-              createdAt={thread?.createdAt}
-              name={thread?.owner.name}
-            />
+    <>
+      <SEO title={`${thread?.title as string} - We The Thread`} />
 
-            <div className="DetailThread-body">
-              <h1 className="DetailThread-title">{thread?.title}</h1>
-
-              <p
-                className="DetailThread-content"
-                dangerouslySetInnerHTML={{ __html: thread?.body || "" }}
-              ></p>
-            </div>
-
-            <div className="DetailThread-actions">
-              <button
-                id="BtnUpvoteThread"
-                className={classNames("DetailThread-action", {
-                  "is-active": hasUpvotedThread,
-                })}
-                type="button"
-                onClick={handleUpvoteThreadClick}
-              >
-                <FontAwesomeIcon icon="thumbs-up" />
-                <span>{thread?.upVotesBy.length}</span>
-              </button>
-
-              <button
-                id="BtnDownvoteComment"
-                className={classNames("DetailThread-action", {
-                  "is-active": hasDownvotedThread,
-                })}
-                type="button"
-                onClick={handleDownvoteThreadClick}
-              >
-                <FontAwesomeIcon icon="thumbs-down" />
-                <span>{thread?.downVotesBy.length}</span>
-              </button>
-
-              <div className="DetailThread-action">
-                <FontAwesomeIcon icon="comments" />
-                <span>{thread?.comments.length}</span>
-              </div>
-            </div>
-
-            <Comments
-              items={thread?.comments}
-              onDownvote={handleCommentDownvote}
-              onNeutralize={handleCommentVoteNeutralize}
-              onUpvote={handleCommentUpvote}
-            />
-
-            <form
-              className="DetailThread-commentSection"
-              onSubmit={handleSubmit(handleCommentFormSubmit)}
-            >
-              <TextArea
-                id="TxtComment"
-                placeholder="Tambah komentar..."
-                value={values.content}
-                {...register("content", { required: true })}
+      <Scaffold
+        appBar={
+          <AppBar>
+            <AppBar.BackButton to="/threads" />
+          </AppBar>
+        }
+      >
+        <div className="DetailThread">
+          {isThreadLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <Owner
+                avatar={thread?.owner?.avatar}
+                createdAt={thread?.createdAt}
+                name={thread?.owner.name}
               />
 
-              <Button
-                id="BtnSubmit"
-                color="primary"
-                disabled={!formState.isValid || isCommentLoading}
-                fullWidth
-                small
-                type="submit"
+              <div className="DetailThread-body">
+                <h1 className="DetailThread-title">{thread?.title}</h1>
+
+                <p
+                  className="DetailThread-content"
+                  dangerouslySetInnerHTML={{ __html: thread?.body || "" }}
+                ></p>
+              </div>
+
+              <div className="DetailThread-actions">
+                <button
+                  id="BtnUpvoteThread"
+                  className={classNames("DetailThread-action", {
+                    "is-active": hasUpvotedThread,
+                  })}
+                  type="button"
+                  onClick={handleUpvoteThreadClick}
+                >
+                  <FontAwesomeIcon icon="thumbs-up" />
+                  <span>{thread?.upVotesBy.length}</span>
+                </button>
+
+                <button
+                  id="BtnDownvoteComment"
+                  className={classNames("DetailThread-action", {
+                    "is-active": hasDownvotedThread,
+                  })}
+                  type="button"
+                  onClick={handleDownvoteThreadClick}
+                >
+                  <FontAwesomeIcon icon="thumbs-down" />
+                  <span>{thread?.downVotesBy.length}</span>
+                </button>
+
+                <div className="DetailThread-action">
+                  <FontAwesomeIcon icon="comments" />
+                  <span>{thread?.comments.length}</span>
+                </div>
+              </div>
+
+              <Comments
+                items={thread?.comments}
+                onDownvote={handleCommentDownvote}
+                onNeutralize={handleCommentVoteNeutralize}
+                onUpvote={handleCommentUpvote}
+              />
+
+              <form
+                className="DetailThread-commentSection"
+                onSubmit={handleSubmit(handleCommentFormSubmit)}
               >
-                {isCommentLoading ? "Mengirim..." : "Kirim"}
-              </Button>
-            </form>
-          </>
-        )}
-      </div>
-    </Scaffold>
+                <TextArea
+                  id="TxtComment"
+                  placeholder="Tambah komentar..."
+                  value={values.content}
+                  {...register("content", { required: true })}
+                />
+
+                <Button
+                  id="BtnSubmit"
+                  color="primary"
+                  disabled={!formState.isValid || isCommentLoading}
+                  fullWidth
+                  small
+                  type="submit"
+                >
+                  {isCommentLoading ? "Mengirim..." : "Kirim"}
+                </Button>
+              </form>
+            </>
+          )}
+        </div>
+      </Scaffold>
+    </>
   );
 };
 

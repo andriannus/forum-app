@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { List as Loader } from "react-content-loader";
 
+import { SEO } from "@/components";
 import { useGetLeaderboardsQuery } from "@/stores";
 
 import "./leaderboards.component.scss";
@@ -9,48 +10,52 @@ const Leaderboards: FC = () => {
   const { data: leaderboards, isLoading } = useGetLeaderboardsQuery();
 
   return (
-    <div className="Leaderboards">
-      <h2 className="Leaderboards-headline">Klasemen Pengguna Aktif</h2>
+    <>
+      <SEO title="Klasemen Pengguna Aktif - We The Thread" />
 
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="Leaderboards-heading">
-            <span>Pengguna</span>
-            <span>Skor</span>
-          </div>
+      <div className="Leaderboards">
+        <h2 className="Leaderboards-headline">Klasemen Pengguna Aktif</h2>
 
-          <div className="Leaderboards-list">
-            {leaderboards?.map((leaderboard, key) => {
-              return (
-                <div
-                  key={leaderboard.user.id}
-                  className="Leaderboards-listItem"
-                >
-                  <div className="Leaderboards-user">
-                    <span className="Leaderboards-number">{key + 1}</span>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="Leaderboards-heading">
+              <span>Pengguna</span>
+              <span>Skor</span>
+            </div>
 
-                    <img
-                      className="Leaderboards-avatar"
-                      src={leaderboard.user.avatar}
-                      alt={leaderboard.user.name}
-                      loading="lazy"
-                    />
+            <div className="Leaderboards-list">
+              {leaderboards?.map((leaderboard, key) => {
+                return (
+                  <div
+                    key={leaderboard.user.id}
+                    className="Leaderboards-listItem"
+                  >
+                    <div className="Leaderboards-user">
+                      <span className="Leaderboards-number">{key + 1}</span>
 
-                    <span className="Leaderboards-username">
-                      {leaderboard.user.name}
-                    </span>
+                      <img
+                        className="Leaderboards-avatar"
+                        src={leaderboard.user.avatar}
+                        alt={leaderboard.user.name}
+                        loading="lazy"
+                      />
+
+                      <span className="Leaderboards-username">
+                        {leaderboard.user.name}
+                      </span>
+                    </div>
+
+                    <span>{leaderboard.score}</span>
                   </div>
-
-                  <span>{leaderboard.score}</span>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
-    </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

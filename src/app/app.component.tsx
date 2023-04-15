@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { FC } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
@@ -11,11 +12,13 @@ const App: FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <Suspense>
-            <AppRoutes />
-          </Suspense>
-        </Router>
+        <HelmetProvider>
+          <Router>
+            <Suspense>
+              <AppRoutes />
+            </Suspense>
+          </Router>
+        </HelmetProvider>
       </PersistGate>
     </Provider>
   );
