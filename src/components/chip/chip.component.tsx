@@ -12,6 +12,7 @@ const Chip: FC<PropsWithChildren<Partial<ChipProps>>> = ({
   children,
   onClick = () => null,
   small = false,
+  ...props
 }) => {
   const chipClass = classNames("Chip", {
     "Chip--button": button,
@@ -20,7 +21,7 @@ const Chip: FC<PropsWithChildren<Partial<ChipProps>>> = ({
   });
 
   return (
-    <div className={chipClass} onClick={onClick}>
+    <div className={chipClass} onClick={onClick} {...props}>
       {children}
     </div>
   );

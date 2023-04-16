@@ -1,0 +1,63 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Banner component > should match snapshot with various kinds of props 1`] = `
+<header
+  class="Banner"
+  data-testid="banner"
+>
+  <h1
+    class="Banner-title"
+  >
+    Masuk
+  </h1>
+</header>
+`;
+
+exports[`Banner component > should match snapshot with various kinds of props 2`] = `
+<header
+  class="Banner"
+  data-testid="banner"
+>
+  <p
+    class="Banner-subtitle"
+  >
+    Silakan masukkan
+  </p>
+</header>
+`;
+
+exports[`Banner component > should match snapshot with various kinds of props 3`] = `
+<header
+  class="Banner"
+  data-testid="banner"
+>
+  <h1
+    class="Banner-title"
+  >
+    Masuk
+  </h1>
+  <p
+    class="Banner-subtitle"
+  >
+    Silakan masukkan
+  </p>
+</header>
+`;
+
+exports[`Banner component > should match snapshot with various kinds of props 4`] = `
+<header
+  class="Banner Banner--center"
+  data-testid="banner"
+>
+  <h1
+    class="Banner-title"
+  >
+    Masuk
+  </h1>
+  <p
+    class="Banner-subtitle"
+  >
+    Silakan masukkan
+  </p>
+</header>
+`;

@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chip component > should match snapshot with various kinds of props 1`] = `
+<div
+  class="Chip Chip--button"
+  data-testid="chip"
+>
+  Hello world
+</div>
+`;
+
+exports[`Chip component > should match snapshot with various kinds of props 2`] = `
+<div
+  class="Chip Chip--small"
+  data-testid="chip"
+>
+  Hello world
+</div>
+`;
+
+exports[`Chip component > should match snapshot with various kinds of props 3`] = `
+<div
+  class="Chip Chip--button Chip--small"
+  data-testid="chip"
+>
+  Hello world
+</div>
+`;

@@ -11,13 +11,14 @@ const Banner: FC<Partial<BannerProps>> = ({
   center = false,
   subtitle,
   title,
+  ...props
 }) => {
   const bannerClass = classNames("Banner", {
     "Banner--center": center,
   });
 
   return (
-    <header className={bannerClass}>
+    <header className={bannerClass} {...props}>
       {title && <h1 className="Banner-title">{title}</h1>}
       {subtitle && <p className="Banner-subtitle">{subtitle}</p>}
     </header>
