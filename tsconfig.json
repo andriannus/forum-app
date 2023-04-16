@@ -21,7 +21,7 @@
     },
     "types": ["@types/node"]
   },
-  "include": ["."],
+  "include": ["src"],
   "exclude": ["dist", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
