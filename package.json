@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "ci:test": "yarn test:unit && start-server-and-test 'yarn' http://localhost:3000 'yarn test:e2e'",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint --ignore-path .gitignore .",
     "preview": "vite preview",
     "test:e2e": "cypress run",
-    "test:unit": "vitest",
+    "test:unit": "vitest run",
     "test:unit:coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -56,6 +57,7 @@
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "sass": "^1.60.0",
+    "start-server-and-test": "^2.0.0",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
