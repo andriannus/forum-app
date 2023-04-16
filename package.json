@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "ci:test": "yarn test:unit && start-server-and-test 'yarn' http://localhost:3000 'yarn test:e2e'",
+    "ci:test": "yarn test:unit && start-server-and-test 'yarn' http-get://localhost:3000 'yarn test:e2e'",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint --ignore-path .gitignore .",
