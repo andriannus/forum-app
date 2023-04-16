@@ -29,7 +29,7 @@ const Login: FC = () => {
       >
         <form className="Login" onSubmit={handleSubmit(handleLoginFormSubmit)}>
           <div className="Login-body">
-            <Banner subtitle="Silahkan masukkan" title="Masuk" />
+            <Banner subtitle="Silakan masukkan" title="Masuk" />
 
             <TextField
               id="TxtEmail"
