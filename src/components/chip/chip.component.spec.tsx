@@ -44,7 +44,19 @@ describe("Chip component", () => {
 
     const component = screen.queryByTestId("chip");
 
-    expect(component).toHaveClass("Chip--big");
+    expect(component).toHaveClass("Chip--small");
+  });
+
+  it("should contain `Chip--button` when button prop is `true`", () => {
+    render(
+      <Chip data-testid="chip" button>
+        Hello world
+      </Chip>,
+    );
+
+    const component = screen.queryByTestId("chip");
+
+    expect(component).toHaveClass("Chip--button");
   });
 
   it("should call onClick prop once when clicked", () => {
