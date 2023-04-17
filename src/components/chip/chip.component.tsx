@@ -21,7 +21,11 @@ const Chip: FC<PropsWithChildren<Partial<ChipProps>>> = ({
   });
 
   return (
-    <div className={chipClass} onClick={onClick} {...props}>
+    <div
+      className={chipClass}
+      onClick={button ? onClick : undefined}
+      {...props}
+    >
       {children}
     </div>
   );
