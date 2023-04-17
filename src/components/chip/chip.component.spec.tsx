@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import Chip from "./chip.component";
@@ -45,5 +45,20 @@ describe("Chip component", () => {
     const component = screen.queryByTestId("chip");
 
     expect(component).toHaveClass("Chip--small");
+  });
+
+  it("should call onClick prop once when clicked", () => {
+    const mockOnClick = vi.fn();
+
+    render(
+      <Chip data-testid="chip" button small onClick={mockOnClick}>
+        #introduction
+      </Chip>,
+    );
+
+    const component = screen.getByTestId("chip");
+    fireEvent.click(component);
+
+    expect(mockOnClick).toHaveBeenCalledOnce();
   });
 });
