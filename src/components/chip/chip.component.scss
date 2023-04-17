@@ -23,7 +23,7 @@
   }
 
   &.is-active {
-    @apply border-ruby-500;
+    @apply border-ruby-500 text-ruby-500;;
     background-color: rgba(250, 64, 50, 0.1);
   }
 }

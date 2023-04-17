@@ -11,6 +11,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "plugin:storybook/recommended",
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",
@@ -24,7 +25,13 @@ module.exports = {
   rules: {
     camelcase: "off",
     "react/react-in-jsx-scope": "off",
-    "spaced-comment": ["error", "always", { markers: ["/"] }],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        markers: ["/"],
+      },
+    ],
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-invalid-void-type": "off",
     "@typescript-eslint/no-misused-promises": [
