@@ -44,7 +44,7 @@ describe("Chip component", () => {
 
     const component = screen.queryByTestId("chip");
 
-    expect(component).toHaveClass("Chip--small");
+    expect(component).toHaveClass("Chip--big");
   });
 
   it("should call onClick prop once when clicked", () => {
