@@ -1,14 +1,23 @@
 import { faker } from "@faker-js/faker";
 import { act, renderHook } from "@testing-library/react-hooks";
+import "@testing-library/jest-dom";
 import { rest } from "msw";
+import { setupServer } from "msw/node";
 import type { FC, PropsWithChildren } from "react";
 import * as ReactRedux from "react-redux";
-import { describe, expect, it, vi } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 
 import { API } from "@/constants";
 import type { LoginResponse, ProfileResponse, Response, User } from "@/models";
 import { setCredentials, setProfile, setupStore } from "@/stores";
-import { server } from "@/utils";
 
 import { useLogin } from "./login.hook";
 
@@ -40,10 +49,23 @@ const userStub: User = {
 };
 
 describe("Login hook", () => {
+  const server = setupServer();
   const useDispatchSpy = vi.spyOn(ReactRedux, "useDispatch");
 
   beforeEach(() => {
     useDispatchSpy.mockClear();
+  });
+
+  beforeAll(() => {
+    server.listen();
+  });
+
+  afterEach(() => {
+    server.resetHandlers();
+  });
+
+  afterAll(() => {
+    server.close();
   });
 
   it("should dispatch action correctly when all API requests success", async () => {
