@@ -1,6 +1,15 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+/**
+ * Test scenario for Banner Component
+ *
+ * - Banner component
+ * -- should match snapshot with various kinds of props
+ * -- should render `title` correctly based on `title` prop
+ * -- should render `subtitle` correctly based on `subtitle` prop
+ */
+
 import "@testing-library/jest-dom";
+import { render, screen, cleanup } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
 
 import Banner from "./banner.component";
 import type { BannerProps } from "./banner.model";

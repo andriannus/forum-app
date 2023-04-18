@@ -1,14 +1,26 @@
+/**
+ * Test scenario for Auth Store
+ *
+ * - Auth Store
+ * -- when auth reducer
+ * --- should return the initial state
+ * --- should set the credentials
+ * --- should remove the credentials
+ * --- should set the profile
+ */
+
 import { describe, expect, it } from "vitest";
 
+import { token } from "@/mocks";
 import type { User } from "@/models";
 
+import type { AuthState } from "./auth.model";
 import {
   authSlice,
   removeCredentials,
   setCredentials,
   setProfile,
 } from "./auth.store";
-import type { AuthState } from "./auth.model";
 
 describe("Auth Store", () => {
   describe("when auth reducer", () => {
@@ -26,15 +38,18 @@ describe("Auth Store", () => {
     });
 
     it("should set the credentials", () => {
-      const expectedState: AuthState = { token: "123", user: null };
+      const expectedState: AuthState = {
+        token,
+        user: null,
+      };
 
-      const mockState = authReducer(initialState, setCredentials("123"));
+      const mockState = authReducer(initialState, setCredentials(token));
 
       expect(mockState).toStrictEqual(expectedState);
     });
 
     it("should remove the credentials", () => {
-      const previousState: AuthState = { token: "123", user: null };
+      const previousState: AuthState = { token, user: null };
       const expectedState: AuthState = { token: null, user: null };
 
       const mockState = authReducer(previousState, removeCredentials());

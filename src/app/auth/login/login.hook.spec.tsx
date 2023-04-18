@@ -1,6 +1,13 @@
+/**
+ * Test scenario for Login Hook
+ *
+ * - Login hook
+ * -- should dispatch action correctly when all API requests success
+ */
+
 import { faker } from "@faker-js/faker";
-import { act, renderHook, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { fetch, Headers, Request, Response } from "cross-fetch";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
@@ -17,11 +24,11 @@ import {
 } from "vitest";
 
 import { API } from "@/constants";
+import { token, user } from "@/mocks";
 import type {
   LoginResponse,
   ProfileResponse,
   Response as APIResponse,
-  User,
 } from "@/models";
 import { setCredentials, setProfile, setupStore } from "@/stores";
 
@@ -45,21 +52,12 @@ vi.mock("react-redux", async () => {
   };
 });
 
-const successResponse: APIResponse = {
-  message: "success",
-  success: true,
-};
-
-const tokenStub = faker.datatype.uuid();
-
-const userStub: User = {
-  avatar: faker.image.avatar(),
-  email: faker.internet.email(),
-  id: faker.datatype.string(),
-  name: faker.name.fullName(),
-};
-
 describe("Login hook", () => {
+  const successResponse: APIResponse = {
+    message: "success",
+    success: true,
+  };
+
   const handlers = [
     rest.get(`${API.BASE_URL as string}/*`, async (_req, res, ctx) => {
       return await res(ctx.json("OK"));
@@ -92,7 +90,7 @@ describe("Login hook", () => {
         return await res(
           ctx.status(200),
           ctx.json<LoginResponse>({
-            data: { token: tokenStub },
+            data: { token },
             ...successResponse,
           }),
         );
@@ -104,7 +102,7 @@ describe("Login hook", () => {
         return await res(
           ctx.status(200),
           ctx.json<ProfileResponse>({
-            data: { user: userStub },
+            data: { user },
             ...successResponse,
           }),
         );
@@ -129,11 +127,11 @@ describe("Login hook", () => {
     });
 
     await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledWith(setCredentials(tokenStub));
+      expect(mockDispatch).toHaveBeenCalledWith(setCredentials(token));
     });
 
     await waitFor(() => {
-      expect(mockDispatch).toHaveBeenCalledWith(setProfile(userStub));
+      expect(mockDispatch).toHaveBeenCalledWith(setProfile(user));
     });
   });
 });
