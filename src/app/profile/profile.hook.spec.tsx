@@ -1,3 +1,10 @@
+/**
+ * Test scenario for Profile Hook
+ *
+ * - Profile hook
+ * -- should dispatch action correctly
+ */
+
 import { act, renderHook } from "@testing-library/react";
 import type { FC, PropsWithChildren } from "react";
 import * as ReactRedux from "react-redux";

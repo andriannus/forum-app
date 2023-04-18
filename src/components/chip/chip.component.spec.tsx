@@ -1,6 +1,17 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+/**
+ * Test scenario for Chip Component
+ *
+ * - Chip component
+ * -- should match snapshot with various kinds of props
+ * -- should contain `is-active` when active prop is `true`
+ * -- should contain `Chip--small` when small prop is `true`
+ * -- should contain `Chip--button` when button prop is `true`
+ * -- should call onClick prop once when clicked
+ */
+
 import "@testing-library/jest-dom";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import Chip from "./chip.component";
 import type { ChipProps } from "./chip.model";

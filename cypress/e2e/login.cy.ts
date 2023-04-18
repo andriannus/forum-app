@@ -1,3 +1,12 @@
+/**
+ * Test scenario for Login
+ *
+ * - Login
+ * -- should enable submit button when input email with correct format
+ * -- should disable submit button when input email with wrong format
+ * -- should login successfully
+ */
+
 describe("Login", () => {
   beforeEach(() => {
     cy.visit("/login");
