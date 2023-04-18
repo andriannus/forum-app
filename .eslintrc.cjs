@@ -10,8 +10,8 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
     "plugin:storybook/recommended",
+    "plugin:prettier/recommended",
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",
@@ -21,7 +21,13 @@ module.exports = {
     project: "./tsconfig.eslint.json",
     sourceType: "module",
   },
-  plugins: ["prettier", "react", "react-hooks", "@typescript-eslint"],
+  plugins: [
+    "prettier",
+    "react",
+    "react-hooks",
+    "storybook",
+    "@typescript-eslint",
+  ],
   rules: {
     camelcase: "off",
     "react/react-in-jsx-scope": "off",
@@ -32,7 +38,14 @@ module.exports = {
         markers: ["/"],
       },
     ],
-    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/consistent-type-assertions": [
+      "error",
+      {
+        assertionStyle: "as",
+        objectLiteralTypeAssertions: "allow",
+      },
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-invalid-void-type": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
@@ -46,13 +59,7 @@ module.exports = {
         allowAny: true,
       },
     ],
-    "@typescript-eslint/consistent-type-assertions": [
-      "error",
-      {
-        assertionStyle: "as",
-        objectLiteralTypeAssertions: "allow",
-      },
-    ],
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/triple-slash-reference": [
       "error",
       {
