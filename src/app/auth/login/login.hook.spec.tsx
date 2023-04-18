@@ -49,7 +49,14 @@ const userStub: User = {
 };
 
 describe("Login hook", () => {
-  const server = setupServer();
+  const handlers = [
+    rest.get(`${API.BASE_URL as string}/*`, async (_req, res, ctx) => {
+      return await res(ctx.json("OK"));
+    }),
+  ];
+
+  const server = setupServer(...handlers);
+
   const useDispatchSpy = vi.spyOn(ReactRedux, "useDispatch");
 
   beforeEach(() => {
