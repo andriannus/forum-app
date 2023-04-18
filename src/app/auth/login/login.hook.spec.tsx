@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
@@ -101,7 +101,7 @@ describe("Login hook", () => {
       <ReactRedux.Provider store={store}>{children}</ReactRedux.Provider>
     );
 
-    const { result, waitForNextUpdate } = renderHook(useLogin, { wrapper });
+    const { result } = renderHook(useLogin, { wrapper });
 
     act(() => {
       result.current.handleLoginFormSubmit({
@@ -110,12 +110,12 @@ describe("Login hook", () => {
       });
     });
 
-    await waitForNextUpdate();
+    await waitFor(() => {
+      expect(mockDispatch).toHaveBeenCalledWith(setCredentials(tokenStub));
+    });
 
-    expect(mockDispatch).toHaveBeenCalledWith(setCredentials(tokenStub));
-
-    await waitForNextUpdate();
-
-    expect(mockDispatch).toHaveBeenCalledWith(setProfile(userStub));
+    await waitFor(() => {
+      expect(mockDispatch).toHaveBeenCalledWith(setProfile(userStub));
+    });
   });
 });

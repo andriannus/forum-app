@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import type { FC, PropsWithChildren } from "react";
 import * as ReactRedux from "react-redux";
 import { describe, expect, it, vi } from "vitest";
