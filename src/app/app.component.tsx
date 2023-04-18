@@ -6,11 +6,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { AppRoutes } from "@/app";
-import { persistor, setupStore } from "@/stores";
+import { persistor, store } from "@/stores";
 
 const App: FC = () => {
   return (
-    <Provider store={setupStore()}>
+    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <HelmetProvider>
           <Router>
