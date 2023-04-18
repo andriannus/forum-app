@@ -1,10 +1,6 @@
-import type { ResponseWithData, User } from "@/models";
+import type { User } from "@/models";
 
 export interface AuthState {
   token: string | null;
   user: User | null;
 }
-
-export type ProfileResponse = ResponseWithData<{
-  user: User;
-}>;

@@ -6,13 +6,14 @@ import { API } from "@/constants";
 import type {
   LoginRequest,
   LoginResponse,
+  ProfileResponse,
   RegisterResponse,
   RegisterRequest,
   User,
 } from "@/models";
 
 import type { RootState } from "../store";
-import type { AuthState, ProfileResponse } from "./auth.model";
+import type { AuthState } from "./auth.model";
 
 export const authSlice = createSlice({
   name: "auth",

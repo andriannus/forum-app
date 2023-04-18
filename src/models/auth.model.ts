@@ -23,3 +23,7 @@ export interface User {
 export type RegisterResponse = ResponseWithData<{
   user: User;
 }>;
+
+export type ProfileResponse = ResponseWithData<{
+  user: User;
+}>;
