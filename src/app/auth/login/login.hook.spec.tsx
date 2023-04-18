@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { act, renderHook, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { fetch, Headers, Request, Response } from "cross-fetch";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import type { FC, PropsWithChildren } from "react";
@@ -16,10 +17,20 @@ import {
 } from "vitest";
 
 import { API } from "@/constants";
-import type { LoginResponse, ProfileResponse, Response, User } from "@/models";
+import type {
+  LoginResponse,
+  ProfileResponse,
+  Response as APIResponse,
+  User,
+} from "@/models";
 import { setCredentials, setProfile, setupStore } from "@/stores";
 
 import { useLogin } from "./login.hook";
+
+global.fetch = fetch;
+global.Headers = Headers;
+global.Request = Request;
+global.Response = Response;
 
 vi.mock("react-router-dom", () => ({
   useNavigate: () => vi.fn(),
@@ -34,7 +45,7 @@ vi.mock("react-redux", async () => {
   };
 });
 
-const successResponse: Response = {
+const successResponse: APIResponse = {
   message: "success",
   success: true,
 };

@@ -20,6 +20,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.3",
     "classnames": "^2.3.2",
+    "cross-fetch": "^3.1.5",
     "date-fns": "^2.29.3",
     "notyf": "^3.10.0",
     "prop-types": "^15.8.1",
